@@ -22,7 +22,7 @@
 #include "gmath.h"
 #include "info.h"
 #include "nmeatime.h"
-#include "qgsgpsmarker.h"
+#include "gps/qgsgpsmarker.h"
 #include "qgsmaptoolcapture.h"
 #include <qwt_plot_curve.h>
 #ifdef WITH_QWTPOLAR

@@ -158,6 +158,8 @@ SET(QGIS_GUI_SRCS
   editorwidgets/qgsvaluerelationsearchwidgetwrapper.cpp
   editorwidgets/qgsvaluerelationwidgetfactory.cpp
 
+  gps/qgsgpsmarker.cpp
+
   layertree/qgscustomlayerorderwidget.cpp
   layertree/qgslayertreeembeddedconfigwidget.cpp
   layertree/qgslayertreeembeddedwidgetregistry.cpp
@@ -915,6 +917,8 @@ SET(QGIS_GUI_HDRS
   editorwidgets/qgsuuidwidgetfactory.h
   editorwidgets/qgsvaluemapwidgetfactory.h
   editorwidgets/qgsvaluerelationwidgetfactory.h
+
+  gps/qgsgpsmarker.h
 
   layertree/qgslayertreeembeddedconfigwidget.h
   layertree/qgslayertreeembeddedwidgetregistry.h
