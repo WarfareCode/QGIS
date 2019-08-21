@@ -333,10 +333,6 @@ void QgsMapCanvas::setLayersPrivate( const QList<QgsMapLayer *> &layers )
 {
   QList<QgsMapLayer *> oldLayers = mSettings.layers();
 
-  // update only if needed
-  if ( layers == oldLayers )
-    return;
-
   const auto constOldLayers = oldLayers;
   for ( QgsMapLayer *layer : constOldLayers )
   {
