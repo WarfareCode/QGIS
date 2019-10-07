@@ -1,7 +1,10 @@
 #!/bin/sh
 
 arch=${1:-x86_64}
-qt=${2:-qt5}
+debug=false
+if [ "$2" == "debug" ]; then
+  debug=true
+fi
 
 if [ "$arch" == "i686" ]; then
     bits=32
@@ -26,7 +29,13 @@ fi
 # Note: This script is written to be used with the Fedora mingw environment
 MINGWROOT=/usr/$arch-w64-mingw32/sys-root/mingw
 
-optflags="-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions --param=ssp-buffer-size=4 -fno-omit-frame-pointer"
+if $debug; then
+  optflags="-O0 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions --param=ssp-buffer-size=4 -fno-omit-frame-pointer"
+  buildtype="Debug"
+else
+  optflags="-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions --param=ssp-buffer-size=4 -fno-omit-frame-pointer"
+  buildtype="RelWithDebugInfo"
+fi
 
 # Halt on errors
 set -e
@@ -37,7 +46,7 @@ export MINGW64_CFLAGS="$optflags"
 export MINGW64_CXXFLAGS="$optflags"
 
 srcdir="$(readlink -f "$(dirname "$(readlink -f "$0")")/..")"
-builddir="$srcdir/build_mingw${bits}_${qt}"
+builddir="$srcdir/build_mingw${bits}"
 installroot="$builddir/dist"
 installprefix="$installroot/usr/$arch-w64-mingw32/sys-root/mingw"
 
@@ -48,12 +57,14 @@ rm -rf "$installroot"
 mkdir -p $builddir
 (
   cd $builddir
+  qsci_ver=$(grep -Eo '\s*([0-9]+\.[0-9]+\.[0-9]+)' $MINGWROOT/include/qt5/Qsci/qsciglobal.h)
   mingw$bits-cmake \
     -DCMAKE_CROSS_COMPILING=1 \
+    -DCMAKE_BUILD_TYPE=$buildtype \
     -DNATIVE_CRSSYNC_BIN=$(readlink -f $srcdir)/build/output/bin/crssync \
-    -DQSCINTILLA_VERSION_STR=2.11.1 \
+    -DQSCINTILLA_VERSION_STR=$qsci_ver \
     -DQSCINTILLA_LIBRARY=$MINGWROOT/lib/libqscintilla2_qt5.dll.a \
-    -DQSCI_MOD_VERSION_STR=2.11.1 \
+    -DQSCI_MOD_VERSION_STR=$qsci_ver \
     -DQWT_INCLUDE_DIR=$MINGWROOT/include/qt5/qwt \
     -DQSCI_SIP_DIR=$MINGWROOT/share/sip/PyQt5/Qsci/ \
     -DBUILD_TESTING=OFF \
@@ -67,6 +78,8 @@ mkdir -p $builddir
     -DQGIS_INCLUDE_SUBDIR=include/qgis \
     -DQGIS_QML_SUBDIR=lib/qt5/qml \
     -DBINDINGS_GLOBAL_INSTALL=ON \
+    -DWITH_SERVER=ON \
+    -DTXT2TAGS_EXECUTABLE= \
     ..
 )
 
@@ -83,7 +96,7 @@ mkdir -p $builddir
 # export DISPLAY=:99
 
 njobs=$(($(grep -c ^processor /proc/cpuinfo) * 3 / 2))
-mingw$bits-make -C$builddir -j$njobs DESTDIR="${installroot}" install
+mingw$bits-make -C$builddir -j$njobs DESTDIR="${installroot}" install VERBOSE=1
 
 binaries=$(find $installprefix -name '*.exe' -or -name '*.dll' -or -name '*.pyd')
 
@@ -195,16 +208,12 @@ cp -a $MINGWROOT/share/qt5/translations/qtbase_*.qm  $installprefix/share/qt5/tr
 cd $MINGWROOT
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
-for file in $(find lib/python3.7 -type f); do
+for file in $(find lib/python3.8 -type f); do
     mkdir -p "$installprefix/$(dirname $file)"
     lnk "$MINGWROOT/$file" "$installprefix/$file"
 done
 IFS=$SAVEIFS
 )
-
-# Osg plugins
-osgPlugins=$(basename $MINGWROOT/bin/osgPlugins-*)
-lnk $MINGWROOT/bin/$osgPlugins $installprefix/bin/$osgPlugins
 
 # Data files
 mkdir -p $installprefix/share/
