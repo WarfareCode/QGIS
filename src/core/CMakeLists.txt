@@ -1142,6 +1142,12 @@ SET(QGIS_CORE_HDRS
   layout/qgsreportsectionlayout.h
   layout/qgscompositionconverter.h
 
+  pal/pal.h
+  pal/feature.h
+  pal/labelposition.h
+  pal/pointset.h
+  pal/rtree.hpp
+
   metadata/qgsabstractmetadatabase.h
   metadata/qgslayermetadata.h
   metadata/qgslayermetadatavalidator.h
