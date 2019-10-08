@@ -145,6 +145,18 @@ QgsAbstractGeometry *QgsCurve::boundary() const
   return multiPoint;
 }
 
+QString QgsCurve::asKML( int precision ) const
+{
+  QgsLineString *lineString = curveToLine();
+  if ( !lineString )
+  {
+    return QString();
+  }
+  QString kml = lineString->asKML( precision );
+  delete lineString;
+  return kml;
+}
+
 QgsCurve *QgsCurve::segmentize( double tolerance, SegmentationToleranceType toleranceType ) const
 {
   return curveToLine( tolerance, toleranceType );

@@ -518,6 +518,62 @@ json QgsLineString::asJsonObject( int precision ) const
   };
 }
 
+QString QgsLineString::asKML( int precision ) const
+{
+  QString kml;
+  if ( isRing() )
+  {
+    kml.append( "<LinearRing>" );
+  }
+  else
+  {
+    kml.append( "<LineString>" );
+  }
+  bool z = is3D();
+  kml.append( "<altitudeMode>" );
+  if ( z )
+  {
+    kml.append( "absolute" );
+  }
+  else
+  {
+    kml.append( "clampToGround" );
+  }
+  kml.append( "</altitudeMode>" );
+  kml.append( "<coordinates>" );
+
+  int nPoints = mX.size();
+  for ( int i = 0; i < nPoints; ++i )
+  {
+    if ( i > 0 )
+    {
+      kml.append( " " );
+    }
+    kml.append( qgsDoubleToString( mX[i], precision ) );
+    kml.append( "," );
+    kml.append( qgsDoubleToString( mY[i], precision ) );
+    if ( z )
+    {
+      kml.append( "," );
+      kml.append( qgsDoubleToString( mZ[i], precision ) );
+    }
+    else
+    {
+      kml.append( ",0" );
+    }
+  }
+  kml.append( "</coordinates>" );
+  if ( isRing() )
+  {
+    kml.append( "</LinearRing>" );
+  }
+  else
+  {
+    kml.append( "</LineString>" );
+  }
+  return kml;
+}
+
 /***************************************************************************
  * This class is considered CRITICAL and any change MUST be accompanied with
  * full unit tests.
