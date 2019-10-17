@@ -101,7 +101,7 @@ DPI of 88 will be assumed.
 %End
 
 
-    QPainter *painter();
+    QPainter *painter() const;
 %Docstring
 Returns the destination QPainter for the render operation.
 

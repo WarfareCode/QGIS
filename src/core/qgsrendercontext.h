@@ -164,7 +164,7 @@ class CORE_EXPORT QgsRenderContext
      * Returns the destination QPainter for the render operation.
      * \see setPainter()
     */
-    QPainter *painter() {return mPainter;}
+    QPainter *painter() const {return mPainter;}
 
     /**
      * Returns the current coordinate transform for the context.
