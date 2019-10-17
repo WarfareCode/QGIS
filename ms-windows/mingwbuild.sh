@@ -46,7 +46,11 @@ export MINGW64_CFLAGS="$optflags"
 export MINGW64_CXXFLAGS="$optflags"
 
 srcdir="$(readlink -f "$(dirname "$(readlink -f "$0")")/..")"
-builddir="$srcdir/build_mingw${bits}"
+if $debug; then
+  builddir="$srcdir/build_mingw${bits}_debug"
+else
+  builddir="$srcdir/build_mingw${bits}"
+fi
 installroot="$builddir/dist"
 installprefix="$installroot/usr/$arch-w64-mingw32/sys-root/mingw"
 
@@ -76,6 +80,7 @@ mkdir -p $builddir
     -DQGIS_DATA_SUBDIR=share/qgis \
     -DQGIS_PLUGIN_SUBDIR=lib/qgis/plugins \
     -DQGIS_INCLUDE_SUBDIR=include/qgis \
+    -DQGIS_SERVER_MODULE_SUBDIR=lib/qgis/server \
     -DQGIS_QML_SUBDIR=lib/qt5/qml \
     -DBINDINGS_GLOBAL_INSTALL=ON \
     -DWITH_SERVER=ON \
