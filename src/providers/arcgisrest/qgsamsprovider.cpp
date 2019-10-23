@@ -18,6 +18,7 @@
 
 #include "qgsamsprovider.h"
 #include "qgsarcgisrestutils.h"
+#include "qgsarcgisrestproviderutils.h"
 #include "qgsdatasourceuri.h"
 #include "qgslogger.h"
 #include "qgsrasteridentifyresult.h"

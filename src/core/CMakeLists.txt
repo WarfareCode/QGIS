@@ -184,6 +184,7 @@ SET(QGIS_CORE_SRCS
   qgsactionmanager.cpp
   qgsaggregatecalculator.cpp
   qgsanimatedicon.cpp
+  qgsarcgisrestutils.cpp
   qgspostgresstringutils.cpp
   qgsattributes.cpp
   qgsattributetableconfig.cpp
@@ -916,6 +917,7 @@ SET(QGIS_CORE_HDRS
   qgsaction.h
   qgsactionscope.h
   qgsactionmanager.h
+  qgsarcgisrestutils.h
   qgsaggregatecalculator.h
   qgspostgresstringutils.h
   qgsattributes.h

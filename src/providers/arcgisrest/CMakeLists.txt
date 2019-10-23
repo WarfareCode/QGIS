@@ -33,14 +33,14 @@ ENDIF ()
 ###############################################################################
 
 SET (AFS_SRCS
-  qgsarcgisrestutils.cpp
+  qgsarcgisrestproviderutils.cpp
   qgsafsdataitems.cpp
   qgsafsfeatureiterator.cpp
   qgsafsprovider.cpp
   qgsafsshareddata.cpp
 )
 SET (AFS_MOC_HDRS
-  qgsarcgisrestutils.h
+  qgsarcgisrestproviderutils.h
   qgsafsdataitems.h
   qgsafsprovider.h
   qgsafsshareddata.h
@@ -93,12 +93,12 @@ INSTALL (TARGETS arcgisfeatureserverprovider
 ###############################################################################
 
 SET (AMS_SRCS
-  qgsarcgisrestutils.cpp
+  qgsarcgisrestproviderutils.cpp
   qgsamsdataitems.cpp
   qgsamsprovider.cpp
 )
 SET (AMS_MOC_HDRS
-  qgsarcgisrestutils.h
+  qgsarcgisrestproviderutils.h
   qgsamsdataitems.h
   qgsamsprovider.h
 )

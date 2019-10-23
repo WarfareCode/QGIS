@@ -12,32 +12,30 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+
 #ifndef QGSARCGISRESTUTILS_H
 #define QGSARCGISRESTUTILS_H
 
+#include "qgis_core.h"
 #include "qgswkbtypes.h"
 #include "qgsrectangle.h"
 #include "qgsmarkersymbollayer.h"
-#include "geometry/qgsabstractgeometry.h"
-#include "geometry/qgscircularstring.h"
-#include "geometry/qgscompoundcurve.h"
-#include "geometry/qgscurvepolygon.h"
-#include "geometry/qgsgeometryengine.h"
-#include "geometry/qgslinestring.h"
-#include "geometry/qgsmultipoint.h"
-#include "geometry/qgsmulticurve.h"
-#include "geometry/qgsmultisurface.h"
-#include "geometry/qgspolygon.h"
-#include "geometry/qgspoint.h"
+#include "qgsabstractgeometry.h"
+#include "qgscircularstring.h"
+#include "qgscompoundcurve.h"
+#include "qgscurvepolygon.h"
+#include "qgsgeometryengine.h"
+#include "qgslinestring.h"
+#include "qgsmultipoint.h"
+#include "qgsmulticurve.h"
+#include "qgsmultisurface.h"
+#include "qgspolygon.h"
+#include "qgspoint.h"
 
-#include <QStringList>
 #include <QVariant>
 
 #include <functional>
 
-class QNetworkReply;
-class QgsNetworkAccessManager;
-class QgsFields;
 class QgsAbstractGeometry;
 class QgsAbstractVectorLayerLabeling;
 class QgsCoordinateReferenceSystem;
@@ -48,7 +46,7 @@ class QgsFillSymbol;
 class QgsMarkerSymbol;
 class QgsFeatureRenderer;
 
-class QgsArcGisRestUtils
+class CORE_EXPORT QgsArcGisRestUtils
 {
   public:
 
@@ -106,48 +104,12 @@ class QgsArcGisRestUtils
 
     static QUrl parseUrl( const QUrl &url );
     static void adjustBaseUrl( QString &baseUrl, const QString name );
+#ifndef SIP_RUN
     static void visitFolderItems( const std::function<void ( const QString &folderName, const QString &url )> &visitor, const QVariantMap &serviceData, const QString &baseUrl );
     static void visitServiceItems( const std::function<void ( const QString &serviceName, const QString &url )> &visitor, const QVariantMap &serviceData, const QString &baseUrl, const ServiceTypeFilter filter = QgsArcGisRestUtils::AllTypes );
     static void addLayerItems( const std::function<void ( const QString &parentLayerId, const QString &layerId, const QString &name, const QString &description, const QString &url, bool isParentLayer, const QString &authid, const QString &format )> &visitor, const QVariantMap &serviceData, const QString &parentUrl, const ServiceTypeFilter filter = QgsArcGisRestUtils::AllTypes );
+#endif
 };
 
-class QgsArcGisAsyncQuery : public QObject
-{
-    Q_OBJECT
-  public:
-    QgsArcGisAsyncQuery( QObject *parent = nullptr );
-    ~QgsArcGisAsyncQuery() override;
-
-    void start( const QUrl &url, const QString &authCfg, QByteArray *result, bool allowCache = false, const QgsStringMap &headers = QgsStringMap() );
-  signals:
-    void finished();
-    void failed( QString errorTitle, QString errorName );
-  private slots:
-    void handleReply();
-
-  private:
-    QNetworkReply *mReply = nullptr;
-    QByteArray *mResult = nullptr;
-};
-
-class QgsArcGisAsyncParallelQuery : public QObject
-{
-    Q_OBJECT
-  public:
-    QgsArcGisAsyncParallelQuery( const QString &authcfg, const QgsStringMap &requestHeaders, QObject *parent = nullptr );
-    void start( const QVector<QUrl> &urls, QVector<QByteArray> *results, bool allowCache = false );
-
-  signals:
-    void finished( QStringList errors );
-  private slots:
-    void handleReply();
-
-  private:
-    QVector<QByteArray> *mResults = nullptr;
-    int mPendingRequests = 0;
-    QStringList mErrors;
-    QString mAuthCfg;
-    QgsStringMap mRequestHeaders;
-};
 
 #endif // QGSARCGISRESTUTILS_H
