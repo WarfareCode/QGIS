@@ -611,6 +611,19 @@ class CORE_EXPORT QgsRenderContext
      */
     bool hasRenderedFeatureHandlers() const { return mHasRenderedFeatureHandlers; }
 
+    /**
+     * Set arbitrary custom flags which consumers might honour to adapt their rendering.
+     * \param flags
+     * \since QGIS 3.10
+     */
+    void setCustomRenderFlags( const QStringList &flags ) { mCustomRenderFlags = flags; }
+
+    /**
+     * Returns a list of custom flags which consumers might honour to adapt their rendering.
+     * \since QGIS 3.10
+     */
+    const QStringList &customRenderFlags() const { return mCustomRenderFlags; }
+
   private:
 
     Flags mFlags;
@@ -671,10 +684,12 @@ class CORE_EXPORT QgsRenderContext
     TextRenderFormat mTextRenderFormat = TextFormatAlwaysOutlines;
     QList< QgsRenderedFeatureHandlerInterface * > mRenderedFeatureHandlers;
     bool mHasRenderedFeatureHandlers = false;
+    QStringList mCustomRenderFlags;
 
 #ifdef QGISDEBUG
     bool mHasTransformContext = false;
 #endif
+
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS( QgsRenderContext::Flags )

@@ -590,6 +590,22 @@ Returns ``True`` if the context has any rendered feature handlers.
 .. versionadded:: 3.10
 %End
 
+    void setCustomRenderFlags( const QStringList &flags );
+%Docstring
+Set arbitrary custom flags which consumers might honour to adapt their rendering.
+
+:param flags:
+
+.. versionadded:: 3.10
+%End
+
+    const QStringList &customRenderFlags() const;
+%Docstring
+Returns a list of custom flags which consumers might honour to adapt their rendering.
+
+.. versionadded:: 3.10
+%End
+
 };
 
 QFlags<QgsRenderContext::Flag> operator|(QgsRenderContext::Flag f1, QFlags<QgsRenderContext::Flag> f2);
