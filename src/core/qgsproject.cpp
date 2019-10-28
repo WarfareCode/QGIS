@@ -1130,7 +1130,7 @@ bool QgsProject::read( QgsProject::ReadFlags flags )
   return returnValue;
 }
 
-bool QgsProject::readProjectFile( const QString &filename, QgsProject::ReadFlags flags )
+bool QgsProject::readProjectFile( const QString &filename, QgsProject::ReadFlags flags, QgsProjectArchive *archive )
 {
   QFile projectFile( filename );
   clearError();
@@ -1211,6 +1211,13 @@ bool QgsProject::readProjectFile( const QString &filename, QgsProject::ReadFlags
   mFile.setFileName( fileName );
   mCachedHomePath.clear();
   mProjectScope.reset();
+
+  // keep the archive and remove the temporary .qgs file
+  if ( archive )
+  {
+    mArchive.reset( archive );
+    mArchive->clearProjectFile();
+  }
 
   // now get any properties
   _getProperties( *doc, mProperties );
@@ -2390,7 +2397,7 @@ QgsPathResolver QgsProject::pathResolver() const
       filePath = fileName();
     }
   }
-  return QgsPathResolver( filePath );
+  return QgsPathResolver( filePath, mArchive->dir() );
 }
 
 QString QgsProject::readPath( const QString &src ) const
@@ -2885,11 +2892,12 @@ QList<QgsMapLayer *> QgsProject::mapLayersByShortName( const QString &shortName 
 bool QgsProject::unzip( const QString &filename, QgsProject::ReadFlags flags )
 {
   clearError();
-  std::unique_ptr<QgsProjectArchive> archive( new QgsProjectArchive() );
+  QgsProjectArchive *archive = new QgsProjectArchive();
 
   // unzip the archive
   if ( !archive->unzip( filename ) )
   {
+    delete archive;
     setError( tr( "Unable to unzip file '%1'" ).arg( filename ) );
     return false;
   }
@@ -2897,6 +2905,7 @@ bool QgsProject::unzip( const QString &filename, QgsProject::ReadFlags flags )
   // test if zip provides a .qgs file
   if ( archive->projectFile().isEmpty() )
   {
+    delete archive;
     setError( tr( "Zip archive does not provide a project file" ) );
     return false;
   }
@@ -2914,15 +2923,12 @@ bool QgsProject::unzip( const QString &filename, QgsProject::ReadFlags flags )
   }
 
   // read the project file
-  if ( ! readProjectFile( archive->projectFile(), flags ) )
+  if ( ! readProjectFile( archive->projectFile(), flags, archive ) )
   {
     setError( tr( "Cannot read unzipped qgs project file" ) );
+    delete archive;
     return false;
   }
-
-  // keep the archive and remove the temporary .qgs file
-  mArchive = std::move( archive );
-  mArchive->clearProjectFile();
 
   return true;
 }
@@ -2953,7 +2959,8 @@ bool QgsProject::zip( const QString &filename )
 
   // save auxiliary storage
   const QFileInfo info( qgsFile );
-  const QString asFileName = info.path() + QDir::separator() + info.completeBaseName() + "." + QgsAuxiliaryStorage::extension();
+  QString asExt = QString( ".%1" ).arg( QgsAuxiliaryStorage::extension() );
+  const QString asFileName = info.path() + QDir::separator() + info.completeBaseName() + asExt;
 
   if ( ! saveAuxiliaryStorage( asFileName ) )
   {
@@ -2965,6 +2972,16 @@ bool QgsProject::zip( const QString &filename )
   // create the archive
   archive->addFile( qgsFile.fileName() );
   archive->addFile( asFileName );
+
+  // Add all other files
+  const QStringList &files = mArchive->files();
+  for ( const QString &file : files )
+  {
+    if ( !file.endsWith( ".qgs", Qt::CaseInsensitive ) && !file.endsWith( asExt, Qt::CaseInsensitive ) )
+    {
+      archive->addFile( file );
+    }
+  }
 
   // zip
   if ( !archive->zip( filename ) )
@@ -3155,6 +3172,38 @@ const QgsAuxiliaryStorage *QgsProject::auxiliaryStorage() const
 QgsAuxiliaryStorage *QgsProject::auxiliaryStorage()
 {
   return mAuxiliaryStorage.get();
+}
+
+QString QgsProject::createAttachedFile( const QString &nameTemplate )
+{
+  QString fileName = nameTemplate;
+  QDir archiveDir( mArchive->dir() );
+  QTemporaryFile tmpFile( archiveDir.filePath( "XXXXXX_" + nameTemplate ), this );
+  tmpFile.setAutoRemove( false );
+  tmpFile.open();
+  mArchive->addFile( tmpFile.fileName() );
+  return tmpFile.fileName();
+}
+
+QString QgsProject::attachedFile( const QString &identifier ) const
+{
+  QString realFileName = identifier;
+  if ( !identifier.startsWith( "attachment:" ) )
+  {
+    return QString();
+  }
+  realFileName = identifier.mid( 11 );
+  return QDir( mArchive->dir() ).absoluteFilePath( identifier.mid( 11 ) );
+}
+
+QgsStringMap QgsProject::attachedFiles() const
+{
+  QgsStringMap map;
+  for ( const QString &fileName : mArchive->files() )
+  {
+    map.insert( QString( "attachment:%1" ).arg( fileName ), QDir( mArchive->dir() ).absoluteFilePath( fileName ) );
+  }
+  return map;
 }
 
 const QgsProjectMetadata &QgsProject::metadata() const

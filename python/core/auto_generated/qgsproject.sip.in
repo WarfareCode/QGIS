@@ -1021,6 +1021,21 @@ Returns the current auxiliary storage.
 .. versionadded:: 3.0
 %End
 
+    QString createAttachedFile( const QString &nameTemplate );
+%Docstring
+Attaches a file to the project
+
+.. note::
+
+   Attached files are only supported by QGZ file based projects
+
+:param nameTemplate: A filename template
+
+:return: The path to the file where the contents can be written to.
+
+.. versionadded:: 3.12
+%End
+
 
 
     const QgsProjectMetadata &metadata() const;

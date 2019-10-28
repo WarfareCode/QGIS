@@ -17,14 +17,15 @@
 
 #include "qgis.h"
 #include "qgsapplication.h"
+#include <QDir>
 #include <QFileInfo>
 #include <QUrl>
 #include <QUuid>
 
 std::vector< std::pair< QString, std::function< QString( const QString & ) > > > QgsPathResolver::sCustomResolvers;
 
-QgsPathResolver::QgsPathResolver( const QString &baseFileName )
-  : mBaseFileName( baseFileName )
+QgsPathResolver::QgsPathResolver( const QString &baseFileName, const QString &attachmentDir )
+  : mBaseFileName( baseFileName ), mAttachmentDir( attachmentDir )
 {
 }
 
@@ -44,6 +45,12 @@ QString QgsPathResolver::readPath( const QString &f ) const
   {
     // strip away "inbuilt:" prefix, replace with actual  inbuilt data folder path
     return QgsApplication::pkgDataPath() + QStringLiteral( "/resources" ) + src.mid( 8 );
+  }
+
+  if ( src.startsWith( QLatin1String( "attachment:" ) ) )
+  {
+    // resolve attachment w.r.t. temporary path where project archive is extracted
+    return QDir( mAttachmentDir ).absoluteFilePath( src.mid( 11 ) );
   }
 
   if ( mBaseFileName.isNull() )
@@ -182,6 +189,12 @@ QString QgsPathResolver::writePath( const QString &src ) const
   {
     // replace inbuilt data folder path with "inbuilt:" prefix
     return QStringLiteral( "inbuilt:" ) + src.mid( QgsApplication::pkgDataPath().length() + 10 );
+  }
+
+  if ( !mAttachmentDir.isEmpty() && src.startsWith( mAttachmentDir ) )
+  {
+    // Replace attachment dir with "attachment:" prefix
+    return QStringLiteral( "attachment:" ) + QFileInfo( src ).fileName();
   }
 
   if ( mBaseFileName.isEmpty() )

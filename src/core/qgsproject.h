@@ -1053,14 +1053,23 @@ class CORE_EXPORT QgsProject : public QObject, public QgsExpressionContextGenera
     QgsAuxiliaryStorage *auxiliaryStorage();
 
     /**
-     * Returns the path to an attached file known by \a fileName.
+     * Attaches a file to the project
+     * \note Attached files are only supported by QGZ file based projects
+     * \param nameTemplate A filename template
+     * \return The path to the file where the contents can be written to.
+     * \since QGIS 3.12
+     */
+    QString createAttachedFile( const QString &nameTemplate );
+
+    /**
+     * Returns the path to an attached file known by \a identifier.
      *
      * \note Not available in Python bindings
      * \note Attached files are only supported by QGZ file based projects
      * \see collectAttachedFiles()
      * \since QGIS 3.8
      */
-    QString attachedFile( const QString &fileName ) const SIP_SKIP;
+    QString attachedFile( const QString &identifier ) const SIP_SKIP;
 
     /**
      * Returns a map of all attached files with relative paths and real paths.
@@ -1688,7 +1697,7 @@ class CORE_EXPORT QgsProject : public QObject, public QgsExpressionContextGenera
     void loadEmbeddedNodes( QgsLayerTreeGroup *group, QgsProject::ReadFlags flags = nullptr ) SIP_SKIP;
 
     //! Read .qgs file
-    bool readProjectFile( const QString &filename, QgsProject::ReadFlags flags = nullptr );
+    bool readProjectFile(const QString &filename, QgsProject::ReadFlags flags = nullptr, QgsProjectArchive *archive = nullptr );
 
     //! Write .qgs file
     bool writeProjectFile( const QString &filename );
