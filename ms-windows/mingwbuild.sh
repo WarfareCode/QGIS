@@ -36,6 +36,7 @@ else
   optflags="-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions --param=ssp-buffer-size=4 -fno-omit-frame-pointer"
   buildtype="RelWithDebugInfo"
 fi
+pyver=$(mingw${bits}-python3 -c "import sys; print('.'.join(list(map(str, sys.version_info))[0:2]))")
 
 # Halt on errors
 set -e
@@ -83,7 +84,7 @@ mkdir -p $builddir
     -DQGIS_SERVER_MODULE_SUBDIR=lib/qgis/server \
     -DQGIS_QML_SUBDIR=lib/qt5/qml \
     -DBINDINGS_GLOBAL_INSTALL=ON \
-    -DWITH_SERVER=ON \
+    -DWITH_SERVER=OFF \
     -DTXT2TAGS_EXECUTABLE= \
     ..
 )
@@ -144,12 +145,12 @@ function linkDep {
     test -e "$destdir/$name" && return 0
     test -e "$destdir/qgisplugins/$name" && return 0
     echo "${indent}${1}"
-    [ ! -e "$MINGWROOT/$1" ] && (echo "Error: missing $MINGWROOT/$1"; return 1)
+    [ ! -e "$MINGWROOT/$1" ] && echo "Error: missing $MINGWROOT/$1" && return 1
     mkdir -p "$destdir" || return 1
     lnk "$MINGWROOT/$1" "$destdir/$name" || return 1
     echo "${2:-bin}/$name: $(rpm -qf "$MINGWROOT/$1")" >> $installprefix/origins.txt
     autoLinkDeps "$destdir/$name" "${indent}  " || return 1
-    [ -e "$MINGWROOT/$1.debug" ] && lnk "$MINGWROOT/$1.debug" "$destdir/$name.debug" || echo "Warning: missing $name.debug"
+    [ -e "$MINGWROOT/$1.debug" ] && lnk "$MINGWROOT/$1.debug" "$destdir/$name.debug" || ($debug && echo "Warning: missing $name.debug" || :)
     return 0
 }
 
@@ -213,7 +214,7 @@ cp -a $MINGWROOT/share/qt5/translations/qtbase_*.qm  $installprefix/share/qt5/tr
 cd $MINGWROOT
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
-for file in $(find lib/python3.8 -type f); do
+for file in $(find lib/python${pyver} -type f); do
     mkdir -p "$installprefix/$(dirname $file)"
     lnk "$MINGWROOT/$file" "$installprefix/$file"
 done
@@ -223,6 +224,7 @@ IFS=$SAVEIFS
 # Data files
 mkdir -p $installprefix/share/
 lnk /usr/share/gdal $installprefix/share/gdal
+lnk /usr/share/proj $installprefix/share/proj
 
 # Sort origins file
 cat $installprefix/origins.txt | sort | uniq > $installprefix/origins.new && mv $installprefix/origins.new $installprefix/origins.txt
