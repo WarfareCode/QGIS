@@ -1199,6 +1199,11 @@ QVariantMap QgsDelimitedTextProviderMetadata::decodeUri( const QString &uri )
   return components;
 }
 
+QString QgsDelimitedTextProviderMetadata::encodeUri( const QVariantMap &parts )
+{
+  return parts.value( QStringLiteral( "path" ) ).toString();
+}
+
 QgsDataProvider *QgsDelimitedTextProviderMetadata::createProvider( const QString &uri, const QgsDataProvider::ProviderOptions &options )
 {
   return new QgsDelimitedTextProvider( uri, options );
