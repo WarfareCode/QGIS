@@ -167,13 +167,6 @@ QgsEllipsoidUtils::EllipsoidParameters QgsEllipsoidUtils::ellipsoidParameters( c
 {
   QString ellipsoid = e;
 #if PROJ_VERSION_MAJOR >= 6
-  // ensure ellipsoid database is populated when first called
-  static std::once_flag initialized;
-  std::call_once( initialized, [ = ]
-  {
-    ( void )definitions();
-  } );
-
   ellipsoid = sProj6EllipsoidAcronymMap.value( ellipsoid, ellipsoid ); // silently upgrade older QGIS acronyms to proj acronyms
 #endif
 
@@ -224,9 +217,40 @@ QgsEllipsoidUtils::EllipsoidParameters QgsEllipsoidUtils::ellipsoidParameters( c
     return params;
   }
 
-#if PROJ_VERSION_MAJOR< 6
   // cache miss - get from database
-  // NOT REQUIRED FOR PROJ >= 6 -- we populate known types once by calling definitions() above
+#if PROJ_VERSION_MAJOR >= 6
+  PJ_CONTEXT *context = QgsProjContext::get();
+  QStringList parts = ellipsoid.split( ':' );
+  QString authority = parts.size() == 2 ? parts[0] : "";
+  QString code = parts.size() == 2 ? parts[1] : "";
+  QgsProjUtils::proj_pj_unique_ptr proj_ellipsoid( proj_create_from_database( context, authority.toLocal8Bit().constData(), code.toLocal8Bit().constData(), PJ_CATEGORY_ELLIPSOID, 0, nullptr ) );
+
+  double semiMajor, semiMinor, invFlattening;
+  int semiMinorComputed = 0;
+  if ( proj_ellipsoid.get() && proj_ellipsoid_get_parameters( context, proj_ellipsoid.get(), &semiMajor, &semiMinor, &semiMinorComputed, &invFlattening ) )
+  {
+    params.semiMajor = semiMajor;
+    params.semiMinor = semiMinor;
+    params.inverseFlattening = invFlattening;
+    if ( !semiMinorComputed )
+      params.crs = QgsCoordinateReferenceSystem::fromProj4( QStringLiteral( "+proj=longlat +a=%1 +b=%2 +no_defs +type=crs" ).arg( params.semiMajor, 0, 'g', 17 ).arg( params.semiMinor, 0, 'g', 17 ) );
+    else if ( !qgsDoubleNear( params.inverseFlattening, 0.0 ) )
+      params.crs = QgsCoordinateReferenceSystem::fromProj4( QStringLiteral( "+proj=longlat +a=%1 +rf=%2 +no_defs +type=crs" ).arg( params.semiMajor, 0, 'g', 17 ).arg( params.inverseFlattening, 0, 'g', 17 ) );
+    else
+      params.crs = QgsCoordinateReferenceSystem::fromProj4( QStringLiteral( "+proj=longlat +a=%1 +no_defs +type=crs" ).arg( params.semiMajor, 0, 'g', 17 ) );
+  }
+  else
+  {
+    params.valid = false;
+  }
+
+  if ( !sDisableCache )
+  {
+    sEllipsoidCache.insert( ellipsoid, params );
+  }
+  return params;
+
+#else
 
   QString radius, parameter2;
   //
@@ -342,16 +366,6 @@ QgsEllipsoidUtils::EllipsoidParameters QgsEllipsoidUtils::ellipsoidParameters( c
   }
   sEllipsoidCacheLock.unlock();
   return params;
-#else
-  params.valid = false;
-
-  QgsReadWriteLocker l( sEllipsoidCacheLock, QgsReadWriteLocker::Write );
-  if ( !sDisableCache )
-  {
-    sEllipsoidCache.insert( ellipsoid, params );
-  }
-
-  return params;
 #endif
 }
 
@@ -368,7 +382,6 @@ QList<QgsEllipsoidUtils::EllipsoidDefinition> QgsEllipsoidUtils::definitions()
   QList<QgsEllipsoidUtils::EllipsoidDefinition> defs;
 
 #if PROJ_VERSION_MAJOR>=6
-  QgsReadWriteLocker locker( sEllipsoidCacheLock, QgsReadWriteLocker::Write );
 
   PJ_CONTEXT *context = QgsProjContext::get();
   if ( PROJ_STRING_LIST authorities = proj_get_authorities_from_database( context ) )
@@ -389,31 +402,7 @@ QList<QgsEllipsoidUtils::EllipsoidDefinition> QgsEllipsoidUtils::definitions()
             def.acronym = QStringLiteral( "%1:%2" ).arg( authority, code );
             name.replace( '_', ' ' );
             def.description = QStringLiteral( "%1 (%2:%3)" ).arg( name, authority, code );
-
-            double semiMajor, semiMinor, invFlattening;
-            int semiMinorComputed = 0;
-            if ( proj_ellipsoid_get_parameters( context, ellipsoid.get(), &semiMajor, &semiMinor, &semiMinorComputed, &invFlattening ) )
-            {
-              def.parameters.semiMajor = semiMajor;
-              def.parameters.semiMinor = semiMinor;
-              def.parameters.inverseFlattening = invFlattening;
-              if ( !semiMinorComputed )
-                def.parameters.crs = QgsCoordinateReferenceSystem::fromProj4( QStringLiteral( "+proj=longlat +a=%1 +b=%2 +no_defs +type=crs" ).arg( def.parameters.semiMajor, 0, 'g', 17 ).arg( def.parameters.semiMinor, 0, 'g', 17 ) );
-              else if ( !qgsDoubleNear( def.parameters.inverseFlattening, 0.0 ) )
-                def.parameters.crs = QgsCoordinateReferenceSystem::fromProj4( QStringLiteral( "+proj=longlat +a=%1 +rf=%2 +no_defs +type=crs" ).arg( def.parameters.semiMajor, 0, 'g', 17 ).arg( def.parameters.inverseFlattening, 0, 'g', 17 ) );
-              else
-                def.parameters.crs = QgsCoordinateReferenceSystem::fromProj4( QStringLiteral( "+proj=longlat +a=%1 +no_defs +type=crs" ).arg( def.parameters.semiMajor, 0, 'g', 17 ) );
-            }
-            else
-            {
-              def.parameters.valid = false;
-            }
-
-            defs << def;
-            if ( !sDisableCache )
-            {
-              sEllipsoidCache.insert( def.acronym, def.parameters );
-            }
+            def.parameters = ellipsoidParameters( def.acronym );
           }
 
           codesIt++;
@@ -425,7 +414,6 @@ QList<QgsEllipsoidUtils::EllipsoidDefinition> QgsEllipsoidUtils::definitions()
     }
     proj_string_list_destroy( authorities );
   }
-  locker.unlock();
 
 #else
   sqlite3_database_unique_ptr database;
