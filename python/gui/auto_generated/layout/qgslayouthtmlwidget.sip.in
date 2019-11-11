@@ -1,0 +1,44 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayouthtmlwidget.h                                 *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+class QgsLayoutHtmlWidget: QgsLayoutItemBaseWidget
+{
+%Docstring
+Input widget for the configuration of QgsLayoutItemHtml
+%End
+
+%TypeHeaderCode
+#include "qgslayouthtmlwidget.h"
+%End
+  public:
+    QgsLayoutHtmlWidget( QgsLayoutFrame *frame );
+    virtual void setMasterLayout( QgsMasterLayoutInterface *masterLayout );
+
+
+  protected:
+
+    virtual bool setNewItem( QgsLayoutItem *item );
+
+
+  protected slots:
+    void populateDataDefinedButtons();
+%Docstring
+Initializes data defined buttons to current atlas coverage layer
+%End
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayouthtmlwidget.h                                 *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

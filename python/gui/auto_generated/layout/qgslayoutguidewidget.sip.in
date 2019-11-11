@@ -1,0 +1,84 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutguidewidget.h                                *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+class QgsLayoutGuideWidget: QgsPanelWidget
+{
+%Docstring
+*************************************************************************
+
+This program is free software; you can redistribute it and/or modify  *
+it under the terms of the GNU General Public License as published by  *
+the Free Software Foundation; either version 2 of the License, or     *
+(at your option) any later version.                                   *
+
+**************************************************************************
+%End
+
+%TypeHeaderCode
+#include "qgslayoutguidewidget.h"
+%End
+  public:
+    QgsLayoutGuideWidget( QWidget *parent, QgsLayout *layout, QgsLayoutView *layoutView );
+
+  public slots:
+
+    void setCurrentPage( int page );
+%Docstring
+Sets the current page number to manage the guides for.
+%End
+
+};
+
+
+class QgsLayoutGuidePositionDelegate : QStyledItemDelegate
+{
+
+%TypeHeaderCode
+#include "qgslayoutguidewidget.h"
+%End
+  public:
+
+    QgsLayoutGuidePositionDelegate( QObject *parent );
+
+  protected:
+    virtual QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem & /*option*/, const QModelIndex &index ) const;
+
+    virtual void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index ) const;
+
+
+};
+
+class QgsLayoutGuideUnitDelegate : QStyledItemDelegate
+{
+
+%TypeHeaderCode
+#include "qgslayoutguidewidget.h"
+%End
+  public:
+
+    QgsLayoutGuideUnitDelegate( QObject *parent );
+
+  protected:
+    virtual QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem & /*option*/, const QModelIndex &index ) const;
+
+    virtual void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index ) const;
+
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutguidewidget.h                                *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

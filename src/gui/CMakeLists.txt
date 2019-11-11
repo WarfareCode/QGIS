@@ -170,22 +170,49 @@ SET(QGIS_GUI_SRCS
   layertree/qgslayertreeviewindicator.cpp
   layertree/qgslayertreeviewitemdelegate.cpp
 
+  layout/qgsgeopdflayertreemodel.cpp
+  layout/qgslayoutaddpagesdialog.cpp
+  layout/qgslayoutappmenuprovider.cpp
+  layout/qgslayoutapputils.cpp
+  layout/qgslayoutatlaswidget.cpp
+  layout/qgslayoutattributeselectiondialog.cpp
+  layout/qgslayoutattributetablewidget.cpp
   layout/qgslayoutcombobox.cpp
   layout/qgslayoutcustomdrophandler.cpp
-  layout/qgslayoutitemguiregistry.cpp
+  layout/qgslayoutguidewidget.cpp
+  layout/qgslayouthtmlwidget.cpp
+  layout/qgslayoutimageexportoptionsdialog.cpp
   layout/qgslayoutitemcombobox.cpp
+  layout/qgslayoutitemguiregistry.cpp
+  layout/qgslayoutitemslistview.cpp
   layout/qgslayoutitemwidget.cpp
+  layout/qgslayoutlabelwidget.cpp
+  layout/qgslayoutlegendlayersdialog.cpp
+  layout/qgslayoutlegendwidget.cpp
+  layout/qgslayoutmapgridwidget.cpp
+  layout/qgslayoutmapwidget.cpp
   layout/qgslayoutmousehandles.cpp
   layout/qgslayoutnewitempropertiesdialog.cpp
+  layout/qgslayoutpagepropertieswidget.cpp
+  layout/qgslayoutpdfexportoptionsdialog.cpp
+  layout/qgslayoutpicturewidget.cpp
+  layout/qgslayoutpolygonwidget.cpp
+  layout/qgslayoutpolylinewidget.cpp
+  layout/qgslayoutpropertieswidget.cpp
+  layout/qgslayoutqptdrophandler.cpp
   layout/qgslayoutreportsectionlabel.cpp
   layout/qgslayoutruler.cpp
+  layout/qgslayoutscalebarwidget.cpp
+  layout/qgslayoutshapewidget.cpp
+  layout/qgslayouttablebackgroundcolorsdialog.cpp
   layout/qgslayoutunitscombobox.cpp
+  layout/qgslayoutvaliditychecks.cpp
   layout/qgslayoutview.cpp
   layout/qgslayoutviewmouseevent.cpp
   layout/qgslayoutviewrubberband.cpp
-  layout/qgslayoutviewtool.cpp
   layout/qgslayoutviewtooladditem.cpp
   layout/qgslayoutviewtooladdnodeitem.cpp
+  layout/qgslayoutviewtool.cpp
   layout/qgslayoutviewtooleditnodes.cpp
   layout/qgslayoutviewtoolmoveitemcontent.cpp
   layout/qgslayoutviewtoolpan.cpp
@@ -194,6 +221,11 @@ SET(QGIS_GUI_SRCS
   layout/qgslayoutviewtooltemporarykeyzoom.cpp
   layout/qgslayoutviewtooltemporarymousepan.cpp
   layout/qgslayoutviewtoolzoom.cpp
+  layout/qgsreportfieldgroupsectionwidget.cpp
+  layout/qgsreportlayoutsectionwidget.cpp
+  layout/qgsreportorganizerwidget.cpp
+  layout/qgsreportsectionmodel.cpp
+  layout/qgsreportsectionwidget.cpp
 
   locator/qgslocatorwidget.cpp
 
@@ -759,22 +791,47 @@ SET(QGIS_GUI_MOC_HDRS
   layertree/qgslayertreeviewindicator.h
   layertree/qgslayertreeviewitemdelegate.h
 
+  layout/qgsgeopdflayertreemodel.h
+  layout/qgslayoutaddpagesdialog.h
+  layout/qgslayoutappmenuprovider.h
+  layout/qgslayoutatlaswidget.h
+  layout/qgslayoutattributeselectiondialog.h
+  layout/qgslayoutattributetablewidget.h
   layout/qgslayoutcombobox.h
   layout/qgslayoutcustomdrophandler.h
   layout/qgslayoutdesignerinterface.h
+  layout/qgslayoutguidewidget.h
+  layout/qgslayouthtmlwidget.h
+  layout/qgslayoutimageexportoptionsdialog.h
   layout/qgslayoutitemcombobox.h
   layout/qgslayoutitemguiregistry.h
+  layout/qgslayoutitemslistview.h
   layout/qgslayoutitemwidget.h
+  layout/qgslayoutlabelwidget.h
+  layout/qgslayoutlegendlayersdialog.h
+  layout/qgslayoutlegendwidget.h
+  layout/qgslayoutmapgridwidget.h
+  layout/qgslayoutmapwidget.h
   layout/qgslayoutmousehandles.h
   layout/qgslayoutnewitempropertiesdialog.h
+  layout/qgslayoutpagepropertieswidget.h
+  layout/qgslayoutpdfexportoptionsdialog.h
+  layout/qgslayoutpicturewidget.h
+  layout/qgslayoutpolygonwidget.h
+  layout/qgslayoutpolylinewidget.h
+  layout/qgslayoutpropertieswidget.h
+  layout/qgslayoutqptdrophandler.h
   layout/qgslayoutruler.h
+  layout/qgslayoutscalebarwidget.h
+  layout/qgslayoutshapewidget.h
+  layout/qgslayouttablebackgroundcolorsdialog.h
   layout/qgslayoutunitscombobox.h
   layout/qgslayoutview.h
   layout/qgslayoutviewrubberband.h
-  layout/qgslayoutviewtool.h
   layout/qgslayoutviewtooladditem.h
   layout/qgslayoutviewtooladdnodeitem.h
   layout/qgslayoutviewtooleditnodes.h
+  layout/qgslayoutviewtool.h
   layout/qgslayoutviewtoolmoveitemcontent.h
   layout/qgslayoutviewtoolpan.h
   layout/qgslayoutviewtoolselect.h
@@ -782,6 +839,11 @@ SET(QGIS_GUI_MOC_HDRS
   layout/qgslayoutviewtooltemporarykeyzoom.h
   layout/qgslayoutviewtooltemporarymousepan.h
   layout/qgslayoutviewtoolzoom.h
+  layout/qgsreportfieldgroupsectionwidget.h
+  layout/qgsreportlayoutsectionwidget.h
+  layout/qgsreportorganizerwidget.h
+  layout/qgsreportsectionmodel.h
+  layout/qgsreportsectionwidget.h
 
   locator/qgslocatorwidget.h
 
@@ -923,6 +985,7 @@ SET(QGIS_GUI_HDRS
   layertree/qgslayertreeembeddedconfigwidget.h
   layertree/qgslayertreeembeddedwidgetregistry.h
 
+  layout/qgslayoutapputils.h
   layout/qgslayoutreportsectionlabel.h
   layout/qgslayoutviewmouseevent.h
 
@@ -988,6 +1051,14 @@ SET(QGIS_GUI_UI_HDRS
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgstablewidgetuibase.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgsrendererpropsdialogbase.h
   ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgseffectstackpropertieswidgetbase.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgslayoutnewpagedialog.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgslayoutguidewidgetbase.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgslayoutimageexportoptions.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgslayoutitemwidgetbase.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgslayoutpagepropertieswidget.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgspdfexportoptions.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgslayoutwidgetbase.h
+  ${CMAKE_CURRENT_BINARY_DIR}/../ui/ui_qgsrenderercontainerbase.h
 )
 
 SET(IMAGE_RCCS ../../images/images.qrc)

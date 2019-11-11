@@ -1,0 +1,65 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutpdfexportoptionsdialog.h                     *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+class QgsLayoutPdfExportOptionsDialog: QDialog
+{
+%Docstring
+A dialog for customizing the properties of an exported PDF file from a layout.
+%End
+
+%TypeHeaderCode
+#include "qgslayoutpdfexportoptionsdialog.h"
+%End
+  public:
+
+    QgsLayoutPdfExportOptionsDialog( QWidget *parent = 0, Qt::WindowFlags flags = 0 );
+%Docstring
+Constructor for QgsLayoutPdfExportOptionsDialog
+
+:param parent: parent widget
+:param flags: window flags
+%End
+
+    void setTextRenderFormat( QgsRenderContext::TextRenderFormat format );
+    QgsRenderContext::TextRenderFormat textRenderFormat() const;
+    void setForceVector( bool force );
+    bool forceVector() const;
+    void enableGeoreferencingOptions( bool enabled );
+    void setGeoreferencingEnabled( bool enabled );
+    bool georeferencingEnabled() const;
+    void setMetadataEnabled( bool enabled );
+    bool metadataEnabled() const;
+    void setRasterTilingDisabled( bool disabled );
+    bool rasterTilingDisabled() const;
+    void setGeometriesSimplified( bool enabled );
+    bool geometriesSimplified() const;
+
+    void setExportGeoPdf( bool enabled );
+    bool exportGeoPdf() const;
+    void setUseOgcBestPracticeFormat( bool enabled );
+    bool useOgcBestPracticeFormat() const;
+
+    void setExportGeoPdfFeatures( bool enabled );
+    bool exportGeoPdfFeatures() const;
+
+    void setExportThemes( const QStringList &themes );
+    QStringList exportThemes() const;
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutpdfexportoptionsdialog.h                     *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

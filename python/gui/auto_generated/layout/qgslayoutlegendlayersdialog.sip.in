@@ -1,0 +1,38 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutlegendlayersdialog.h                         *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+class QgsLayoutLegendLayersDialog: QDialog
+{
+%Docstring
+A dialog to add new layers to the legend.
+%End
+
+%TypeHeaderCode
+#include "qgslayoutlegendlayersdialog.h"
+%End
+  public:
+    QgsLayoutLegendLayersDialog( QWidget *parent = 0 );
+
+    void setVisibleLayers( const QList<QgsMapLayer *> &layers );
+%Docstring
+Sets a list of visible ``layers``, to use for filtering within the dialog.
+%End
+
+    QList< QgsMapLayer * > selectedLayers() const;
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutlegendlayersdialog.h                         *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

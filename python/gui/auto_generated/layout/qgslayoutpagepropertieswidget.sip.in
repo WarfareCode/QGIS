@@ -1,0 +1,44 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutpagepropertieswidget.h                       *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+class QgsLayoutPagePropertiesWidget : QgsLayoutItemBaseWidget
+{
+%Docstring
+A widget for configuring properties of pages in a layout
+%End
+
+%TypeHeaderCode
+#include "qgslayoutpagepropertieswidget.h"
+%End
+  public:
+
+    QgsLayoutPagePropertiesWidget( QWidget *parent, QgsLayoutItem *page );
+%Docstring
+Constructor for QgsLayoutPagePropertiesWidget.
+%End
+
+  signals:
+
+    void pageOrientationChanged();
+%Docstring
+Emitted when page orientation changes
+%End
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutpagepropertieswidget.h                       *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

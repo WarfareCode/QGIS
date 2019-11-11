@@ -1,0 +1,31 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutatlaswidget.h                                *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+class QgsLayoutAtlasWidget: QWidget
+{
+%Docstring
+A widget for layout atlas settings.
+%End
+
+%TypeHeaderCode
+#include "qgslayoutatlaswidget.h"
+%End
+  public:
+    QgsLayoutAtlasWidget( QWidget *parent, QgsPrintLayout *layout );
+    void setMessageBar( QgsMessageBar *bar );
+
+};
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutatlaswidget.h                                *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

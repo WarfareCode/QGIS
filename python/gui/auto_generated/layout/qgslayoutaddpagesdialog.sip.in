@@ -1,0 +1,70 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutaddpagesdialog.h                             *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+class QgsLayoutAddPagesDialog : QDialog
+{
+%Docstring
+A dialog for configuring properties of new pages to be added to a layout
+%End
+
+%TypeHeaderCode
+#include "qgslayoutaddpagesdialog.h"
+%End
+  public:
+
+    enum PagePosition
+    {
+      BeforePage,
+      AfterPage,
+      AtEnd
+    };
+
+    QgsLayoutAddPagesDialog( QWidget *parent = 0, Qt::WindowFlags flags = 0 );
+%Docstring
+Constructor for QgsLayoutAddPagesDialog.
+%End
+
+    void setLayout( QgsLayout *layout );
+%Docstring
+Sets the ``layout`` associated with the dialog. This allows the dialog
+to retrieve properties from the layout and perform tasks like automatic
+conversion of units.
+%End
+
+    int numberPages() const;
+%Docstring
+Returns the number of pages to insert.
+%End
+
+    PagePosition pagePosition() const;
+%Docstring
+Returns the position at which to insert the new pages.
+%End
+
+    int beforePage() const;
+%Docstring
+Returns the page number for which new pages should be inserted before/after.
+%End
+
+    QgsLayoutSize pageSize() const;
+%Docstring
+Returns the desired page size.
+%End
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutaddpagesdialog.h                             *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

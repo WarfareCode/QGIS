@@ -1,0 +1,52 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutreportsectionlabel.h                         *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+class QgsLayoutReportSectionLabel: QGraphicsRectItem
+{
+%Docstring
+Draws a label describing the current report section within a layout designer view.
+
+.. note::
+
+   not available in Python bindings
+
+.. versionadded:: 3.0
+%End
+
+%TypeHeaderCode
+#include "qgslayoutreportsectionlabel.h"
+%End
+  public:
+
+    QgsLayoutReportSectionLabel( QgsLayout *layout, QgsLayoutView *view );
+%Docstring
+Constructor for QgsLayoutReportSectionLabel.
+%End
+
+    virtual void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0 );
+
+
+    void setLabel( const QString &label );
+%Docstring
+Sets the ``label``.
+%End
+
+};
+
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutreportsectionlabel.h                         *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

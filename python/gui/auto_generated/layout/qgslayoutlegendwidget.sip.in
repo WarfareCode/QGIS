@@ -1,0 +1,115 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutlegendwidget.h                               *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+class QgsLayoutLegendWidget: QgsLayoutItemBaseWidget
+{
+%Docstring
+A widget for setting properties relating to a layout legend.
+%End
+
+%TypeHeaderCode
+#include "qgslayoutlegendwidget.h"
+%End
+  public:
+    explicit QgsLayoutLegendWidget( QgsLayoutItemLegend *legend, QgsMapCanvas *mapCanvas );
+    virtual void setMasterLayout( QgsMasterLayoutInterface *masterLayout );
+
+
+    void updateLegend();
+%Docstring
+Updates the legend layers and groups
+%End
+
+    QgsLayoutItemLegend *legend();
+    virtual void setReportTypeString( const QString &string );
+
+
+  protected:
+
+    virtual bool setNewItem( QgsLayoutItem *item );
+
+
+  public slots:
+
+    void mWrapCharLineEdit_textChanged( const QString &text );
+    void mTitleLineEdit_textChanged( const QString &text );
+    void mColumnCountSpinBox_valueChanged( int c );
+    void mSplitLayerCheckBox_toggled( bool checked );
+    void mEqualColumnWidthCheckBox_toggled( bool checked );
+    void mSymbolWidthSpinBox_valueChanged( double d );
+    void mSymbolHeightSpinBox_valueChanged( double d );
+    void mWmsLegendWidthSpinBox_valueChanged( double d );
+    void mWmsLegendHeightSpinBox_valueChanged( double d );
+    void mTitleSpaceBottomSpinBox_valueChanged( double d );
+    void mGroupSpaceSpinBox_valueChanged( double d );
+    void mLayerSpaceSpinBox_valueChanged( double d );
+    void mSymbolSpaceSpinBox_valueChanged( double d );
+    void mIconLabelSpaceSpinBox_valueChanged( double d );
+    void mFontColorButton_colorChanged( const QColor &newFontColor );
+    void mBoxSpaceSpinBox_valueChanged( double d );
+    void mColumnSpaceSpinBox_valueChanged( double d );
+    void mLineSpacingSpinBox_valueChanged( double d );
+    void mCheckBoxAutoUpdate_stateChanged( int state );
+    void composerMapChanged( QgsLayoutItem *item );
+    void mCheckboxResizeContents_toggled( bool checked );
+
+    void mRasterStrokeGroupBox_toggled( bool state );
+    void mRasterStrokeWidthSpinBox_valueChanged( double d );
+    void mRasterStrokeColorButton_colorChanged( const QColor &newColor );
+
+    void mMoveDownToolButton_clicked();
+    void mMoveUpToolButton_clicked();
+    void mRemoveToolButton_clicked();
+    void mAddToolButton_clicked();
+    void mEditPushButton_clicked();
+    void mCountToolButton_clicked( bool checked );
+    void mExpressionFilterButton_toggled( bool checked );
+    void mFilterByMapToolButton_toggled( bool checked );
+    void resetLayerNodeToDefaults();
+    void mUpdateAllPushButton_clicked();
+    void mAddGroupToolButton_clicked();
+    void mLayerExpressionButton_clicked();
+
+    void mFilterLegendByAtlasCheckBox_toggled( bool checked );
+
+    void selectedChanged( const QModelIndex &current, const QModelIndex &previous );
+
+    void setCurrentNodeStyleFromAction();
+
+    void setLegendMapViewData();
+
+};
+
+
+class QgsLayoutLegendMenuProvider : QgsLayerTreeViewMenuProvider
+{
+
+%TypeHeaderCode
+#include "qgslayoutlegendwidget.h"
+%End
+  public:
+    QgsLayoutLegendMenuProvider( QgsLayerTreeView *view, QgsLayoutLegendWidget *w );
+
+    virtual QMenu *createContextMenu();
+
+
+  protected:
+};
+
+
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutlegendwidget.h                               *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

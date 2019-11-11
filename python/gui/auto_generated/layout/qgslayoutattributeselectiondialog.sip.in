@@ -1,0 +1,313 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutattributeselectiondialog.h                   *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+
+class QgsLayoutAttributeTableColumnModel: QAbstractTableModel
+{
+%Docstring
+A model for displaying columns shown in a QgsLayoutAttributeTable
+%End
+
+%TypeHeaderCode
+#include "qgslayoutattributeselectiondialog.h"
+%End
+  public:
+
+    enum ShiftDirection
+    {
+      ShiftUp,
+      ShiftDown
+    };
+
+    QgsLayoutAttributeTableColumnModel( QgsLayoutItemAttributeTable *table, QObject *parent /TransferThis/ = 0 );
+%Docstring
+Constructor for QgsLayoutAttributeTableColumnModel.
+
+:param table: QgsLayoutItemAttributeTable the model is attached to
+:param parent: optional parent
+%End
+
+    virtual int rowCount( const QModelIndex &parent = QModelIndex() ) const;
+
+    virtual int columnCount( const QModelIndex &parent = QModelIndex() ) const;
+
+    virtual QVariant data( const QModelIndex &index, int role ) const;
+
+    virtual QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
+
+    virtual bool setData( const QModelIndex &index, const QVariant &value, int role = Qt::EditRole );
+
+    virtual Qt::ItemFlags flags( const QModelIndex &index ) const;
+
+    virtual bool removeRows( int row, int count, const QModelIndex &parent = QModelIndex() );
+
+    virtual bool insertRows( int row, int count, const QModelIndex &parent = QModelIndex() );
+
+    virtual QModelIndex index( int row, int column, const QModelIndex &parent ) const;
+
+    virtual QModelIndex parent( const QModelIndex &child ) const;
+
+
+    bool moveRow( int row, ShiftDirection direction );
+%Docstring
+Moves the specified row up or down in the model. Used for rearranging the attribute tables
+columns.
+
+:return: true if the move is allowed
+
+:param row: row in model representing attribute table column to move
+:param direction: direction to move the attribute table column
+%End
+
+    void resetToLayer();
+%Docstring
+Resets the attribute table's columns to match the source layer's fields. Remove all existing
+attribute table columns and column customizations.
+%End
+
+    QgsLayoutTableColumn *columnFromIndex( const QModelIndex &index ) const;
+%Docstring
+Returns the QgsLayoutTableColumn corresponding to an index in the model.
+
+.. seealso:: :py:func:`indexFromColumn`
+%End
+
+    QModelIndex indexFromColumn( QgsLayoutTableColumn *column );
+%Docstring
+Returns a QModelIndex corresponding to a QgsLayoutTableColumn in the model.
+
+.. seealso:: :py:func:`columnFromIndex`
+%End
+
+    void setColumnAsSorted( QgsLayoutTableColumn *column, Qt::SortOrder order );
+%Docstring
+Sets a specified column as a sorted column in the :py:class:`QgsLayoutItemAttributeTable`. The column will be
+added to the end of the sort rank list, ie it will take the next largest available sort rank.
+
+.. seealso:: :py:func:`removeColumnFromSort`
+
+.. seealso:: :py:func:`moveColumnInSortRank`
+%End
+
+    void setColumnAsUnsorted( QgsLayoutTableColumn *column );
+%Docstring
+Sets a specified column as an unsorted column in the :py:class:`QgsLayoutItemAttributeTable`. The column will be
+removed from the sort rank list.
+
+.. seealso:: :py:func:`setColumnAsSorted`
+%End
+
+    bool moveColumnInSortRank( QgsLayoutTableColumn *column, ShiftDirection direction );
+%Docstring
+Moves a column up or down in the sort rank for the :py:class:`QgsLayoutItemAttributeTable`.
+
+.. seealso:: :py:func:`setColumnAsSorted`
+%End
+
+};
+
+
+
+class QgsLayoutTableSortColumnsProxyModel: QSortFilterProxyModel
+{
+%Docstring
+Allows for filtering QgsComposerAttributeTable columns by columns which are sorted or unsorted
+%End
+
+%TypeHeaderCode
+#include "qgslayoutattributeselectiondialog.h"
+%End
+  public:
+
+    enum ColumnFilterType
+    {
+      ShowSortedColumns,
+      ShowUnsortedColumns
+    };
+
+    QgsLayoutTableSortColumnsProxyModel( QgsLayoutItemAttributeTable *table, ColumnFilterType filterType, QObject *parent /TransferThis/ = 0 );
+%Docstring
+Constructor for QgsLayoutTableSortColumnsProxyModel.
+
+:param table: QgsLayoutItemAttributeTable the model is attached to
+:param filterType: filter for columns, controls whether sorted or unsorted columns are shown
+:param parent: optional parent
+%End
+
+    virtual bool lessThan( const QModelIndex &left, const QModelIndex &right ) const;
+
+    virtual int columnCount( const QModelIndex &parent = QModelIndex() ) const;
+
+    virtual QVariant data( const QModelIndex &index, int role ) const;
+
+    virtual QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
+
+    virtual Qt::ItemFlags flags( const QModelIndex &index ) const;
+
+    virtual bool setData( const QModelIndex &index, const QVariant &value, int role = Qt::EditRole );
+
+
+    QgsLayoutTableColumn *columnFromRow( int row );
+%Docstring
+Returns the QgsLayoutTableColumn corresponding to a row in the proxy model.
+
+.. seealso:: :py:func:`columnFromIndex`
+%End
+
+    QgsLayoutTableColumn *columnFromIndex( const QModelIndex &index ) const;
+%Docstring
+Returns the QgsLayoutTableColumn corresponding to an index in the proxy model.
+
+.. seealso:: :py:func:`columnFromRow`
+
+.. seealso:: :py:func:`columnFromSourceIndex`
+%End
+
+    QgsLayoutTableColumn *columnFromSourceIndex( const QModelIndex &sourceIndex ) const;
+%Docstring
+Returns the QgsLayoutTableColumn corresponding to an index from the source
+QgsLayoutItemAttributeTableColumnModel model.
+
+.. seealso:: :py:func:`columnFromRow`
+
+.. seealso:: :py:func:`columnFromIndex`
+%End
+
+    void resetFilter();
+%Docstring
+Invalidates the current filter used by the proxy model
+%End
+
+  protected:
+    virtual bool filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const;
+
+
+};
+
+
+class QgsLayoutColumnAlignmentDelegate : QItemDelegate
+{
+%Docstring
+A delegate for showing column alignment as a combo box
+%End
+
+%TypeHeaderCode
+#include "qgslayoutattributeselectiondialog.h"
+%End
+  public:
+    explicit QgsLayoutColumnAlignmentDelegate( QObject *parent = 0 );
+    virtual QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+
+    virtual void setEditorData( QWidget *editor, const QModelIndex &index ) const;
+
+    virtual void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index ) const;
+
+    virtual void updateEditorGeometry( QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+
+
+};
+
+
+
+class QgsLayoutColumnSourceDelegate : QItemDelegate
+{
+%Docstring
+A delegate for showing column attribute source as a :py:class:`QgsFieldExpressionWidget`
+%End
+
+%TypeHeaderCode
+#include "qgslayoutattributeselectiondialog.h"
+%End
+  public:
+    QgsLayoutColumnSourceDelegate( QgsVectorLayer *vlayer, QObject *parent = 0, const QgsLayoutObject *layoutObject = 0 );
+    virtual QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+
+    virtual void setEditorData( QWidget *editor, const QModelIndex &index ) const;
+
+    virtual void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index ) const;
+
+    virtual void updateEditorGeometry( QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+
+  public slots:
+    void commitAndCloseEditor();
+};
+
+
+class QgsLayoutColumnWidthDelegate : QItemDelegate
+{
+%Docstring
+A delegate for showing column width as a spin box
+%End
+
+%TypeHeaderCode
+#include "qgslayoutattributeselectiondialog.h"
+%End
+  public:
+    explicit QgsLayoutColumnWidthDelegate( QObject *parent = 0 );
+    virtual QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+
+    virtual void setEditorData( QWidget *editor, const QModelIndex &index ) const;
+
+    virtual void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index ) const;
+
+    virtual void updateEditorGeometry( QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+
+
+};
+
+
+
+class QgsLayoutColumnSortOrderDelegate : QItemDelegate
+{
+%Docstring
+A delegate for showing column sort order as a combo box
+%End
+
+%TypeHeaderCode
+#include "qgslayoutattributeselectiondialog.h"
+%End
+  public:
+    explicit QgsLayoutColumnSortOrderDelegate( QObject *parent = 0 );
+    virtual QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+
+    virtual void setEditorData( QWidget *editor, const QModelIndex &index ) const;
+
+    virtual void setModelData( QWidget *editor, QAbstractItemModel *model, const QModelIndex &index ) const;
+
+    virtual void updateEditorGeometry( QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
+
+
+};
+
+
+
+class QgsLayoutAttributeSelectionDialog: QDialog
+{
+%Docstring
+A dialog to select what attributes to display (in the table item), set the column properties and specify a sort order
+%End
+
+%TypeHeaderCode
+#include "qgslayoutattributeselectiondialog.h"
+%End
+  public:
+    QgsLayoutAttributeSelectionDialog( QgsLayoutItemAttributeTable *table, QgsVectorLayer *vLayer, QWidget *parent = 0, Qt::WindowFlags f = 0 );
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutattributeselectiondialog.h                   *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

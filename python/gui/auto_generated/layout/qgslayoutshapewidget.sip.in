@@ -1,0 +1,40 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutshapewidget.h                                *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+class QgsLayoutShapeWidget: QgsLayoutItemBaseWidget
+{
+%Docstring
+Input widget for the configuration of QgsLayoutItemShape
+%End
+
+%TypeHeaderCode
+#include "qgslayoutshapewidget.h"
+%End
+  public:
+    explicit QgsLayoutShapeWidget( QgsLayoutItemShape *shape );
+    virtual void setMasterLayout( QgsMasterLayoutInterface *masterLayout );
+
+
+  protected:
+
+    virtual bool setNewItem( QgsLayoutItem *item );
+
+
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutshapewidget.h                                *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

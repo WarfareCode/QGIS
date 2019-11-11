@@ -21,6 +21,7 @@
 #include <QObject>
 
 class QgsLayout;
+class QgsLayoutGuideWidget;
 class QgsLayoutView;
 class QgsLayoutItem;
 class QgsMessageBar;
@@ -85,6 +86,13 @@ class GUI_EXPORT QgsLayoutDesignerInterface: public QObject
      * \see view()
      */
     virtual QgsLayout *layout() = 0;
+
+    /**
+     * Sets the current \a layout to edit in the designer.
+     * \see layout()
+     * \since QGIS 3.12
+     */
+    virtual void setCurrentLayout( QgsLayout *layout ) = 0;
 
     /**
      * Returns the master layout displayed in the designer.
@@ -342,6 +350,25 @@ class GUI_EXPORT QgsLayoutDesignerInterface: public QObject
      * \since QGIS 3.6
      */
     virtual void activateTool( StandardTool tool ) = 0;
+
+    /**
+     * Sets a section \a title, to use to update the dialog title to display
+     * the currently edited section.
+     * \since QGIS 3.12
+     */
+    virtual void setSectionTitle( const QString &title ) = 0;
+
+    /**
+     * Returns the dialog's guide manager widget, if it exists.
+     * \since QGIS 3.12
+     */
+    virtual QgsLayoutGuideWidget *guideWidget() = 0;
+
+    /**
+     * Toggles the visibility of the guide manager dock widget.
+     * \since QGIS 3.12
+     */
+    virtual void showGuideDock( bool show ) = 0;
 
   public slots:
 

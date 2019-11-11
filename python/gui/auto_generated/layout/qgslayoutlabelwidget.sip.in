@@ -1,0 +1,39 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutlabelwidget.h                                *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+class QgsLayoutLabelWidget: QgsLayoutItemBaseWidget
+{
+%Docstring
+A widget for layout item settings.
+%End
+
+%TypeHeaderCode
+#include "qgslayoutlabelwidget.h"
+%End
+  public:
+    explicit QgsLayoutLabelWidget( QgsLayoutItemLabel *label );
+    virtual void setMasterLayout( QgsMasterLayoutInterface *masterLayout );
+
+
+  protected:
+
+    virtual bool setNewItem( QgsLayoutItem *item );
+
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutlabelwidget.h                                *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

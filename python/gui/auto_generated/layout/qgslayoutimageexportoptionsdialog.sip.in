@@ -1,0 +1,146 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutimageexportoptionsdialog.h                   *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+class QgsLayoutImageExportOptionsDialog: QDialog
+{
+%Docstring
+A dialog for customizing the properties of an exported image file.
+
+.. versionadded:: 3.0
+%End
+
+%TypeHeaderCode
+#include "qgslayoutimageexportoptionsdialog.h"
+%End
+  public:
+
+    QgsLayoutImageExportOptionsDialog( QWidget *parent = 0, Qt::WindowFlags flags = 0 );
+%Docstring
+Constructor for QgsLayoutImageExportOptionsDialog
+
+:param parent: parent widget
+:param flags: window flags
+%End
+
+    void setResolution( double resolution );
+%Docstring
+Sets the initial resolution displayed in the dialog.
+
+:param resolution: default resolution in DPI
+
+.. seealso:: :py:func:`resolution`
+%End
+
+    double resolution() const;
+%Docstring
+Returns the selected resolution from the dialog.
+
+:return: image resolution in DPI
+
+.. seealso:: :py:func:`setResolution`
+%End
+
+    void setImageSize( QSizeF size );
+%Docstring
+Sets the target image size. This is used to calculate the default size in pixels
+and also for determining the image's width to height ratio.
+
+:param size: image size
+%End
+
+    int imageWidth() const;
+%Docstring
+Returns the user-set image width in pixels.
+
+.. seealso:: :py:func:`imageHeight`
+%End
+
+    int imageHeight() const;
+%Docstring
+Returns the user-set image height in pixels.
+
+.. seealso:: :py:func:`imageWidth`
+%End
+
+    void setCropToContents( bool crop );
+%Docstring
+Sets whether the crop to contents option should be checked in the dialog
+
+:param crop: set to true to check crop to contents
+
+.. seealso:: :py:func:`cropToContents`
+%End
+
+    bool cropToContents() const;
+%Docstring
+Returns whether the crop to contents option is checked in the dialog.
+
+.. seealso:: :py:func:`setCropToContents`
+%End
+
+    void setGenerateWorldFile( bool generate );
+%Docstring
+Sets whether the generate world file option should be checked.
+
+.. seealso:: :py:func:`generateWorldFile`
+%End
+
+    bool generateWorldFile() const;
+%Docstring
+Returns whether the generate world file option is checked in the dialog.
+
+.. seealso:: :py:func:`setGenerateWorldFile`
+%End
+
+    void setAntialiasing( bool antialias );
+%Docstring
+Sets whether antialiasing should be used in the export.
+
+.. seealso:: :py:func:`antialiasing`
+%End
+
+    bool antialiasing() const;
+%Docstring
+Returns whether antialiasing should be used in the export.
+
+.. seealso:: :py:func:`setAntialiasing`
+%End
+
+    void getCropMargins( int &topMargin, int &rightMargin, int &bottomMargin, int &leftMargin ) const;
+%Docstring
+Fetches the current crop to contents margin values, in pixels.
+
+:param topMargin: destination for top margin
+:param rightMargin: destination for right margin
+:param bottomMargin: destination for bottom margin
+:param leftMargin: destination for left margin
+%End
+
+    void setCropMargins( int topMargin, int rightMargin, int bottomMargin, int leftMargin );
+%Docstring
+Sets the current crop to contents margin values, in pixels.
+
+:param topMargin: top margin
+:param rightMargin: right margin
+:param bottomMargin: bottom margin
+:param leftMargin: left margin
+%End
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutimageexportoptionsdialog.h                   *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

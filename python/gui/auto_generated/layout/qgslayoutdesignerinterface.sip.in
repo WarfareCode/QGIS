@@ -62,6 +62,15 @@ Returns the current layout displayed in the designer.
 .. seealso:: :py:func:`view`
 %End
 
+    virtual void setCurrentLayout( QgsLayout *layout ) = 0;
+%Docstring
+Sets the current ``layout`` to edit in the designer.
+
+.. seealso:: :py:func:`layout`
+
+.. versionadded:: 3.12
+%End
+
     virtual QgsMasterLayoutInterface *masterLayout() = 0;
 %Docstring
 Returns the master layout displayed in the designer.
@@ -402,6 +411,28 @@ Removes the specified ``dock`` widget from layout designer (without deleting it)
 Activates a standard layout designer ``tool``.
 
 .. versionadded:: 3.6
+%End
+
+    virtual void setSectionTitle( const QString &title ) = 0;
+%Docstring
+Sets a section ``title``, to use to update the dialog title to display
+the currently edited section.
+
+.. versionadded:: 3.12
+%End
+
+    virtual QgsLayoutGuideWidget *guideWidget() = 0;
+%Docstring
+Returns the dialog's guide manager widget, if it exists.
+
+.. versionadded:: 3.12
+%End
+
+    virtual void showGuideDock( bool show ) = 0;
+%Docstring
+Toggles the visibility of the guide manager dock widget.
+
+.. versionadded:: 3.12
 %End
 
   public slots:

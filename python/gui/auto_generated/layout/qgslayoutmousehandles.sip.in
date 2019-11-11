@@ -1,0 +1,145 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutmousehandles.h                               *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+
+
+class QgsLayoutMouseHandles: QObject, QGraphicsRectItem
+{
+%Docstring
+Handles drawing of selection outlines and mouse handles in a QgsLayoutView
+
+Also is responsible for mouse interactions such as resizing and moving selected items.
+
+.. note::
+
+   not available in Python bindings
+
+.. versionadded:: 3.0
+%End
+
+%TypeHeaderCode
+#include "qgslayoutmousehandles.h"
+%End
+  public:
+
+    enum MouseAction
+    {
+      MoveItem,
+      ResizeUp,
+      ResizeDown,
+      ResizeLeft,
+      ResizeRight,
+      ResizeLeftUp,
+      ResizeRightUp,
+      ResizeLeftDown,
+      ResizeRightDown,
+      SelectItem,
+      NoAction
+    };
+
+    enum ItemPositionMode
+    {
+      UpperLeft,
+      UpperMiddle,
+      UpperRight,
+      MiddleLeft,
+      Middle,
+      MiddleRight,
+      LowerLeft,
+      LowerMiddle,
+      LowerRight
+    };
+
+    enum SnapGuideMode
+    {
+      Item,
+      Point
+    };
+
+    QgsLayoutMouseHandles( QgsLayout *layout, QgsLayoutView *view );
+
+    void setLayout( QgsLayout *layout );
+%Docstring
+Sets the ``layout`` for the handles.
+
+.. seealso:: :py:func:`layout`
+%End
+
+    QgsLayout *layout();
+%Docstring
+Returns the layout for the handles.
+
+.. seealso:: :py:func:`setLayout`
+%End
+
+    virtual void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = 0 );
+
+
+    QgsLayoutMouseHandles::MouseAction mouseActionForScenePos( QPointF sceneCoordPos );
+%Docstring
+Finds out which mouse move action to choose depending on the scene cursor position
+%End
+
+    bool isDragging() const;
+%Docstring
+Returns ``True`` is user is currently dragging the handles
+%End
+
+    bool isResizing() const;
+%Docstring
+Returns ``True`` is user is currently resizing with the handles
+%End
+
+    bool shouldBlockEvent( QInputEvent *event ) const;
+
+  protected:
+
+    virtual void mouseMoveEvent( QGraphicsSceneMouseEvent *event );
+
+    virtual void mouseReleaseEvent( QGraphicsSceneMouseEvent *event );
+
+    virtual void mousePressEvent( QGraphicsSceneMouseEvent *event );
+
+    virtual void mouseDoubleClickEvent( QGraphicsSceneMouseEvent *event );
+
+    virtual void hoverMoveEvent( QGraphicsSceneHoverEvent *event );
+
+    virtual void hoverLeaveEvent( QGraphicsSceneHoverEvent *event );
+
+
+  public slots:
+
+    void selectionChanged();
+%Docstring
+Sets up listeners to sizeChanged signal for all selected items
+%End
+
+    void selectedItemSizeChanged();
+%Docstring
+Redraws handles when selected item size changes
+%End
+
+    void selectedItemRotationChanged();
+%Docstring
+Redraws handles when selected item rotation changes
+%End
+
+};
+
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutmousehandles.h                               *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

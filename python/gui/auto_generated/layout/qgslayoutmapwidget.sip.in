@@ -1,0 +1,147 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutmapwidget.h                                  *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+class QgsLayoutMapWidget: QgsLayoutItemBaseWidget
+{
+%Docstring
+Input widget for the configuration of QgsLayoutItemMap
+%End
+
+%TypeHeaderCode
+#include "qgslayoutmapwidget.h"
+%End
+  public:
+    explicit QgsLayoutMapWidget( QgsLayoutItemMap *item, QgsMapCanvas *mapCanvas );
+    virtual void setMasterLayout( QgsMasterLayoutInterface *masterLayout );
+
+
+    virtual void setReportTypeString( const QString &string );
+
+    virtual void setDesignerInterface( QgsLayoutDesignerInterface *iface );
+
+
+  public slots:
+    void mScaleLineEdit_editingFinished();
+    void setToMapCanvasExtent();
+    void setToMapCanvasScale();
+    void viewExtentInCanvas();
+    void viewScaleInCanvas();
+    void updatePreview();
+    void mFollowVisibilityPresetCheckBox_stateChanged( int state );
+    void mKeepLayerListCheckBox_stateChanged( int state );
+    void mKeepLayerStylesCheckBox_stateChanged( int state );
+    void mDrawCanvasItemsCheckBox_stateChanged( int state );
+    void overviewMapChanged( QgsLayoutItem *item );
+    void mOverviewBlendModeComboBox_currentIndexChanged( int index );
+    void mOverviewInvertCheckbox_toggled( bool state );
+    void mOverviewCenterCheckbox_toggled( bool state );
+    void overviewStackingChanged( int value );
+    void overviewStackingLayerChanged( QgsMapLayer *layer );
+
+    void mXMinLineEdit_editingFinished();
+    void mXMaxLineEdit_editingFinished();
+    void mYMinLineEdit_editingFinished();
+    void mYMaxLineEdit_editingFinished();
+
+    void mAtlasMarginRadio_toggled( bool checked );
+
+    void mAtlasCheckBox_toggled( bool checked );
+    void mAtlasMarginSpinBox_valueChanged( int value );
+    void mAtlasFixedScaleRadio_toggled( bool checked );
+    void mAtlasPredefinedScaleRadio_toggled( bool checked );
+
+    void mAddGridPushButton_clicked();
+    void mRemoveGridPushButton_clicked();
+    void mGridUpButton_clicked();
+    void mGridDownButton_clicked();
+
+    QgsLayoutItemMapGrid *currentGrid();
+    void mGridListWidget_currentItemChanged( QListWidgetItem *current, QListWidgetItem *previous );
+    void mGridListWidget_itemChanged( QListWidgetItem *item );
+    void mGridPropertiesButton_clicked();
+
+    void mAddOverviewPushButton_clicked();
+    void mRemoveOverviewPushButton_clicked();
+    void mOverviewUpButton_clicked();
+    void mOverviewDownButton_clicked();
+    QgsLayoutItemMapOverview *currentOverview();
+    void mOverviewCheckBox_toggled( bool state );
+    void mOverviewListWidget_currentItemChanged( QListWidgetItem *current, QListWidgetItem *previous );
+    void mOverviewListWidget_itemChanged( QListWidgetItem *item );
+    void setOverviewItemsEnabled( bool enabled );
+    void setOverviewItems( QgsLayoutItemMapOverview *overview );
+    void blockOverviewItemsSignals( bool block );
+
+  protected:
+    virtual bool setNewItem( QgsLayoutItem *item );
+
+
+  protected slots:
+    void populateDataDefinedButtons();
+%Docstring
+Initializes data defined buttons to current atlas coverage layer
+%End
+
+};
+
+
+class QgsLayoutMapItemBlocksLabelsModel : QSortFilterProxyModel
+{
+
+%TypeHeaderCode
+#include "qgslayoutmapwidget.h"
+%End
+  public:
+
+    explicit QgsLayoutMapItemBlocksLabelsModel( QgsLayoutItemMap *map, QgsLayoutModel *layoutModel, QObject *parent = 0 );
+
+    virtual int columnCount( const QModelIndex &parent = QModelIndex() ) const;
+
+    virtual QVariant data( const QModelIndex &index, int role ) const;
+
+    virtual bool setData( const QModelIndex &index, const QVariant &value, int role );
+
+    virtual Qt::ItemFlags flags( const QModelIndex &index ) const;
+
+
+  protected:
+
+    virtual bool filterAcceptsRow( int source_row, const QModelIndex &source_parent ) const;
+
+
+};
+
+class QgsLayoutMapLabelingWidget: QgsLayoutItemBaseWidget
+{
+%Docstring
+Allows configuration of layout map labeling settings.
+%End
+
+%TypeHeaderCode
+#include "qgslayoutmapwidget.h"
+%End
+  public:
+    explicit QgsLayoutMapLabelingWidget( QgsLayoutItemMap *map );
+
+  protected:
+    virtual bool setNewItem( QgsLayoutItem *item );
+
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutmapwidget.h                                  *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

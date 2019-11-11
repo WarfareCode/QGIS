@@ -1,0 +1,38 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutapputils.h                                   *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+class QgsLayoutAppUtils
+{
+%Docstring
+Utils for layout handling from app.
+%End
+
+%TypeHeaderCode
+#include "qgslayoutapputils.h"
+%End
+  public:
+
+    static void registerGuiForKnownItemTypes(QgsMapCanvas *mapCanvas);
+%Docstring
+Registers the GUI handlers for known layout item types.
+%End
+
+};
+
+
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutapputils.h                                   *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

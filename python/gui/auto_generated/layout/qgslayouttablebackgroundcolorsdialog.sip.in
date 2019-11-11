@@ -1,0 +1,43 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayouttablebackgroundcolorsdialog.h                *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+class QgsLayoutTableBackgroundColorsDialog: QDialog
+{
+%Docstring
+A dialog for customization of the cell background colors for a QgsLayoutTable
+
+.. versionadded:: 3.0
+%End
+
+%TypeHeaderCode
+#include "qgslayouttablebackgroundcolorsdialog.h"
+%End
+  public:
+
+    QgsLayoutTableBackgroundColorsDialog( QgsLayoutTable *table, QWidget *parent = 0, Qt::WindowFlags flags = 0 );
+%Docstring
+Constructor for QgsLayoutTableBackgroundColorsDialog
+
+:param table: associated layout table
+:param parent: parent widget
+:param flags: window flags
+%End
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayouttablebackgroundcolorsdialog.h                *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

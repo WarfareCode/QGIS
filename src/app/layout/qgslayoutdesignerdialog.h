@@ -59,6 +59,7 @@ class QgsAppLayoutDesignerInterface : public QgsLayoutDesignerInterface
     QgsAppLayoutDesignerInterface( QgsLayoutDesignerDialog *dialog );
     QWidget *window() override;
     QgsLayout *layout() override;
+    void setCurrentLayout( QgsLayout *layout ) override;
     QgsMasterLayoutInterface *masterLayout() override;
     QgsLayoutView *view() override;
     QgsMessageBar *messageBar() override;
@@ -80,6 +81,9 @@ class QgsAppLayoutDesignerInterface : public QgsLayoutDesignerInterface
     void addDockWidget( Qt::DockWidgetArea area, QDockWidget *dock ) override;
     void removeDockWidget( QDockWidget *dock ) override;
     void activateTool( StandardTool tool ) override;
+    void setSectionTitle( const QString &title ) override;
+    QgsLayoutGuideWidget *guideWidget() override;
+    void showGuideDock( bool show ) override;
 
   public slots:
 

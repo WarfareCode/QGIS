@@ -1,0 +1,96 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutmapgridwidget.h                              *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+class QgsLayoutMapGridWidget: QgsLayoutItemBaseWidget
+{
+%Docstring
+Input widget for the configuration of QgsLayoutItemMapGrids
+%End
+
+%TypeHeaderCode
+#include "qgslayoutmapgridwidget.h"
+%End
+  public:
+    explicit QgsLayoutMapGridWidget( QgsLayoutItemMapGrid *mapGrid, QgsLayoutItemMap *map );
+
+  public slots:
+
+    void setGridItems();
+    void mIntervalXSpinBox_editingFinished();
+    void mIntervalYSpinBox_editingFinished();
+    void mOffsetXSpinBox_valueChanged( double value );
+    void mOffsetYSpinBox_valueChanged( double value );
+    void mCrossWidthSpinBox_valueChanged( double val );
+    void mFrameWidthSpinBox_valueChanged( double val );
+    void mGridFrameMarginSpinBox_valueChanged( double val );
+    void mFrameStyleComboBox_currentIndexChanged( int );
+    void mGridFramePenSizeSpinBox_valueChanged( double d );
+    void mGridFramePenColorButton_colorChanged( const QColor &newColor );
+    void mGridFrameFill1ColorButton_colorChanged( const QColor &newColor );
+    void mGridFrameFill2ColorButton_colorChanged( const QColor &newColor );
+    void mGridTypeComboBox_currentIndexChanged( const QString &text );
+    void mMapGridCRSButton_clicked();
+    void mGridBlendComboBox_currentIndexChanged( int index );
+    void mCheckGridLeftSide_toggled( bool checked );
+    void mCheckGridRightSide_toggled( bool checked );
+    void mCheckGridTopSide_toggled( bool checked );
+    void mCheckGridBottomSide_toggled( bool checked );
+
+    void mFrameDivisionsLeftComboBox_currentIndexChanged( int index );
+    void mFrameDivisionsRightComboBox_currentIndexChanged( int index );
+    void mFrameDivisionsTopComboBox_currentIndexChanged( int index );
+    void mFrameDivisionsBottomComboBox_currentIndexChanged( int index );
+
+    void mDrawAnnotationGroupBox_toggled( bool state );
+    void mAnnotationFormatButton_clicked();
+
+    void mAnnotationDisplayLeftComboBox_currentIndexChanged( const QString &text );
+    void mAnnotationDisplayRightComboBox_currentIndexChanged( const QString &text );
+    void mAnnotationDisplayTopComboBox_currentIndexChanged( const QString &text );
+    void mAnnotationDisplayBottomComboBox_currentIndexChanged( const QString &text );
+
+    void mAnnotationPositionLeftComboBox_currentIndexChanged( const QString &text );
+    void mAnnotationPositionRightComboBox_currentIndexChanged( const QString &text );
+    void mAnnotationPositionTopComboBox_currentIndexChanged( const QString &text );
+    void mAnnotationPositionBottomComboBox_currentIndexChanged( const QString &text );
+
+    void mAnnotationDirectionComboBoxLeft_currentIndexChanged( int index );
+    void mAnnotationDirectionComboBoxRight_currentIndexChanged( int index );
+    void mAnnotationDirectionComboBoxTop_currentIndexChanged( int index );
+    void mAnnotationDirectionComboBoxBottom_currentIndexChanged( int index );
+
+    void mAnnotationFormatComboBox_currentIndexChanged( int index );
+    void mCoordinatePrecisionSpinBox_valueChanged( int value );
+    void mDistanceToMapFrameSpinBox_valueChanged( double d );
+    void mAnnotationFontColorButton_colorChanged( const QColor &color );
+
+  protected:
+
+    virtual void updateGuiElements();
+%Docstring
+Sets the current composer map values to the GUI elements
+%End
+
+  protected slots:
+    void populateDataDefinedButtons();
+%Docstring
+Initializes data defined buttons to current atlas coverage layer
+%End
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutmapgridwidget.h                              *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

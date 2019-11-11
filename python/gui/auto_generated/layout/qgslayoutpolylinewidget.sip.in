@@ -1,0 +1,39 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutpolylinewidget.h                             *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+class QgsLayoutPolylineWidget: QgsLayoutItemBaseWidget
+{
+%Docstring
+Input widget for QgsLayoutItemPolyline
+%End
+
+%TypeHeaderCode
+#include "qgslayoutpolylinewidget.h"
+%End
+  public:
+    explicit QgsLayoutPolylineWidget( QgsLayoutItemPolyline *polyline );
+    virtual void setMasterLayout( QgsMasterLayoutInterface *masterLayout );
+
+
+  protected:
+
+    virtual bool setNewItem( QgsLayoutItem *item );
+
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutpolylinewidget.h                             *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

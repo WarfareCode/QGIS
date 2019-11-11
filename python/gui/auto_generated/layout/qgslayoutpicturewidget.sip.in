@@ -1,0 +1,66 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutpicturewidget.h                              *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+class QgsLayoutPictureWidget: QgsLayoutItemBaseWidget
+{
+%Docstring
+A widget for configuring layout picture items.
+%End
+
+%TypeHeaderCode
+#include "qgslayoutpicturewidget.h"
+%End
+  public:
+    explicit QgsLayoutPictureWidget( QgsLayoutItemPicture *picture );
+    virtual void setMasterLayout( QgsMasterLayoutInterface *masterLayout );
+
+
+    void addStandardDirectoriesToPreview();
+%Docstring
+Add the icons of the standard directories to the preview
+%End
+
+  public slots:
+    void mPictureBrowseButton_clicked();
+    void mPictureLineEdit_editingFinished();
+    void mPictureRotationSpinBox_valueChanged( double d );
+    void mPreviewListWidget_currentItemChanged( QListWidgetItem *current, QListWidgetItem *previous );
+    void mAddDirectoryButton_clicked();
+    void mRemoveDirectoryButton_clicked();
+    void mRotationFromComposerMapCheckBox_stateChanged( int state );
+    void mapChanged( QgsLayoutItem *item );
+    void mResizeModeComboBox_currentIndexChanged( int index );
+    void mAnchorPointComboBox_currentIndexChanged( int index );
+
+  protected:
+
+    virtual bool setNewItem( QgsLayoutItem *item );
+
+
+    virtual void resizeEvent( QResizeEvent *event );
+
+
+  protected slots:
+    void populateDataDefinedButtons();
+%Docstring
+Initializes data defined buttons to current atlas coverage layer
+%End
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutpicturewidget.h                              *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

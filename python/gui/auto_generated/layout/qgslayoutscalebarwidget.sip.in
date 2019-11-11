@@ -1,0 +1,66 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutscalebarwidget.h                             *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+
+class QgsLayoutScaleBarWidget: QgsLayoutItemBaseWidget, QgsExpressionContextGenerator
+{
+%Docstring
+A widget to define the properties of a QgsLayoutItemScaleBar.
+%End
+
+%TypeHeaderCode
+#include "qgslayoutscalebarwidget.h"
+%End
+  public:
+    explicit QgsLayoutScaleBarWidget( QgsLayoutItemScaleBar *scaleBar );
+    virtual void setMasterLayout( QgsMasterLayoutInterface *masterLayout );
+
+
+    virtual QgsExpressionContext createExpressionContext() const;
+
+  protected:
+
+    virtual bool setNewItem( QgsLayoutItem *item );
+
+
+  public slots:
+
+    void mHeightSpinBox_valueChanged( double d );
+    void mLineWidthSpinBox_valueChanged( double d );
+    void mSegmentSizeSpinBox_valueChanged( double d );
+    void mSegmentsLeftSpinBox_valueChanged( int i );
+    void mNumberOfSegmentsSpinBox_valueChanged( int i );
+    void mUnitLabelLineEdit_textChanged( const QString &text );
+    void mMapUnitsPerBarUnitSpinBox_valueChanged( double d );
+    void mFillColorButton_colorChanged( const QColor &newColor );
+    void mFillColor2Button_colorChanged( const QColor &newColor );
+    void mStrokeColorButton_colorChanged( const QColor &newColor );
+    void mStyleComboBox_currentIndexChanged( const QString &text );
+    void mLabelBarSpaceSpinBox_valueChanged( double d );
+    void mBoxSizeSpinBox_valueChanged( double d );
+    void mLabelVerticalPlacementComboBox_currentIndexChanged( int index );
+    void mLabelHorizontalPlacementComboBox_currentIndexChanged( int index );
+    void alignmentChanged();
+    void mUnitsComboBox_currentIndexChanged( int index );
+    void mLineJoinStyleCombo_currentIndexChanged( int index );
+    void mLineCapStyleCombo_currentIndexChanged( int index );
+    void mMinWidthSpinBox_valueChanged( double d );
+    void mMaxWidthSpinBox_valueChanged( double d );
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutscalebarwidget.h                             *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

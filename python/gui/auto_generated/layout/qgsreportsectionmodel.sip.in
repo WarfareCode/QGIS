@@ -1,0 +1,67 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgsreportsectionmodel.h                               *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+class QgsReportSectionModel : QAbstractItemModel
+{
+%Docstring
+A model for managing the sections in a QgsReport.
+
+.. versionadded:: 3.0
+%End
+
+%TypeHeaderCode
+#include "qgsreportsectionmodel.h"
+%End
+  public:
+
+    QgsReportSectionModel( QgsReport *report, QObject *parent );
+%Docstring
+Constructor for QgsReportSectionModel, for the specified ``report``.
+%End
+
+    virtual Qt::ItemFlags flags( const QModelIndex &index ) const;
+
+    virtual QVariant data( const QModelIndex &index, int role = Qt::DisplayRole ) const;
+
+     virtual QVariant headerData( int section, Qt::Orientation orientation,
+                         int role = Qt::DisplayRole ) const;
+    virtual int rowCount( const QModelIndex &parent = QModelIndex() ) const;
+
+    virtual bool hasChildren( const QModelIndex &parent = QModelIndex() ) const;
+
+    virtual int columnCount( const QModelIndex & = QModelIndex() ) const;
+
+
+    virtual QModelIndex index( int row, int column, const QModelIndex &parent = QModelIndex() ) const;
+
+    virtual QModelIndex parent( const QModelIndex &index ) const;
+
+    virtual bool removeRows( int row, int count, const QModelIndex &parent = QModelIndex() );
+
+
+
+    QgsAbstractReportSection *sectionForIndex( const QModelIndex &index ) const;
+%Docstring
+Returns the report section for the given ``index``.
+%End
+
+    QModelIndex indexForSection( QgsAbstractReportSection *section ) const;
+
+    void setEditedSection( QgsAbstractReportSection *section );
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgsreportsectionmodel.h                               *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

@@ -1,0 +1,36 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutappmenuprovider.h                            *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+class QgsLayoutAppMenuProvider : QObject, QgsLayoutViewMenuProvider
+{
+%Docstring
+A menu provider for QgsLayoutView
+%End
+
+%TypeHeaderCode
+#include "qgslayoutappmenuprovider.h"
+%End
+  public:
+
+    QgsLayoutAppMenuProvider( QgsLayoutDesignerInterface *designer );
+
+    virtual QMenu *createContextMenu( QWidget *parent, QgsLayout *layout, QPointF layoutPoint ) const;
+
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutappmenuprovider.h                            *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/

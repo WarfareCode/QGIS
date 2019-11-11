@@ -1,0 +1,39 @@
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutpolygonwidget.h                              *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
+
+
+
+
+class QgsLayoutPolygonWidget: QgsLayoutItemBaseWidget
+{
+%Docstring
+Input widget for QgsLayoutItemPolygon
+%End
+
+%TypeHeaderCode
+#include "qgslayoutpolygonwidget.h"
+%End
+  public:
+    explicit QgsLayoutPolygonWidget( QgsLayoutItemPolygon *polygon );
+    virtual void setMasterLayout( QgsMasterLayoutInterface *masterLayout );
+
+
+  protected:
+
+    virtual bool setNewItem( QgsLayoutItem *item );
+
+
+};
+
+/************************************************************************
+ * This file has been generated automatically from                      *
+ *                                                                      *
+ * src/gui/layout/qgslayoutpolygonwidget.h                              *
+ *                                                                      *
+ * Do not edit manually ! Edit header and run scripts/sipify.pl again   *
+ ************************************************************************/
