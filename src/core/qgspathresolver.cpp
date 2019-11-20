@@ -23,6 +23,7 @@
 #include <QUuid>
 
 std::vector< std::pair< QString, std::function< QString( const QString & ) > > > QgsPathResolver::sCustomResolvers;
+std::vector< std::pair< QString, std::function< QString( const QString & ) > > > QgsPathResolver::sCustomWriters;
 
 QgsPathResolver::QgsPathResolver( const QString &baseFileName, const QString &attachmentDir )
   : mBaseFileName( baseFileName ), mAttachmentDir( attachmentDir )
@@ -178,12 +179,33 @@ bool QgsPathResolver::removePathPreprocessor( const QString &id )
   return prevCount != sCustomResolvers.size();
 }
 
-QString QgsPathResolver::writePath( const QString &src ) const
+QString QgsPathResolver::setPathWriter( const std::function<QString( const QString & )> &writer )
 {
+  QString id = QUuid::createUuid().toString();
+  sCustomWriters.emplace_back( std::make_pair( id, writer ) );
+  return id;
+}
+
+bool QgsPathResolver::removePathWriter( const QString &id )
+{
+  const size_t prevCount = sCustomWriters.size();
+  sCustomWriters.erase( std::remove_if( sCustomWriters.begin(), sCustomWriters.end(), [id]( std::pair< QString, std::function< QString( const QString & ) > > &a )
+  {
+    return a.first == id;
+  } ), sCustomWriters.end() );
+  return prevCount != sCustomWriters.size();
+}
+
+QString QgsPathResolver::writePath( const QString &s ) const
+{
+  QString src = s;
   if ( src.isEmpty() )
   {
     return src;
   }
+
+  for ( const auto &writer :  sCustomWriters )
+    src = writer.second( src );
 
   if ( src.startsWith( QgsApplication::pkgDataPath() + QStringLiteral( "/resources" ) ) )
   {
