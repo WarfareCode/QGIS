@@ -1036,7 +1036,33 @@ Attaches a file to the project
 .. versionadded:: 3.12
 %End
 
+    QString attachedFile( const QString &identifier ) const;
+%Docstring
+Returns the path to an attached file known by ``identifier``.
 
+.. note::
+
+   Attached files are only supported by QGZ file based projects
+
+.. seealso:: :py:func:`collectAttachedFiles`
+
+.. versionadded:: 3.8
+%End
+
+    QgsStringMap attachedFiles() const;
+%Docstring
+Returns a map of all attached files with relative paths and real paths.
+
+.. note::
+
+   Attached files are only supported by QGZ file based projects
+
+.. seealso:: :py:func:`collectAttachedFiles`
+
+.. seealso:: :py:func:`attachedFile`
+
+.. versionadded:: 3.8
+%End
 
     const QgsProjectMetadata &metadata() const;
 %Docstring

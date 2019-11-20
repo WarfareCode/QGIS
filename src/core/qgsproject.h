@@ -1064,23 +1064,21 @@ class CORE_EXPORT QgsProject : public QObject, public QgsExpressionContextGenera
     /**
      * Returns the path to an attached file known by \a identifier.
      *
-     * \note Not available in Python bindings
      * \note Attached files are only supported by QGZ file based projects
      * \see collectAttachedFiles()
      * \since QGIS 3.8
      */
-    QString attachedFile( const QString &identifier ) const SIP_SKIP;
+    QString attachedFile( const QString &identifier ) const;
 
     /**
      * Returns a map of all attached files with relative paths and real paths.
      *
-     * \note Not available in Python bindings
      * \note Attached files are only supported by QGZ file based projects
      * \see collectAttachedFiles()
      * \see attachedFile()
      * \since QGIS 3.8
      */
-    QgsStringMap attachedFiles() const SIP_SKIP;
+    QgsStringMap attachedFiles() const;
 
     /**
      * Returns a reference to the project's metadata store.
@@ -1660,7 +1658,7 @@ class CORE_EXPORT QgsProject : public QObject, public QgsExpressionContextGenera
      * \param flags optional project reading flags
      * \returns TRUE if function worked; else is FALSE
     */
-    bool _getMapLayers( const QDomDocument &doc, QList<QDomNode> &brokenNodes, QgsProject::ReadFlags flags = nullptr );
+    bool _getMapLayers( const QDomDocument &doc, QList<QDomNode> &brokenNodes, QStringList &failedLayers, QgsProject::ReadFlags flags = nullptr );
 
     /**
      * Set error message from read/write operation
@@ -1697,7 +1695,7 @@ class CORE_EXPORT QgsProject : public QObject, public QgsExpressionContextGenera
     void loadEmbeddedNodes( QgsLayerTreeGroup *group, QgsProject::ReadFlags flags = nullptr ) SIP_SKIP;
 
     //! Read .qgs file
-    bool readProjectFile(const QString &filename, QgsProject::ReadFlags flags = nullptr, QgsProjectArchive *archive = nullptr );
+    bool readProjectFile( const QString &filename, QgsProject::ReadFlags flags = nullptr, QgsProjectArchive *archive = nullptr );
 
     //! Write .qgs file
     bool writeProjectFile( const QString &filename );
