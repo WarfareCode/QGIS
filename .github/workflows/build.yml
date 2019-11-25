@@ -1,0 +1,13 @@
+name: MinGW Build
+on: [push]
+
+jobs:
+  build:
+    name: MinGW build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: build kadas2-mingw-buildenv
+        run: docker build -t kadas2-mingw-buildenv ms-windows
+      - name: build application
+        run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh
