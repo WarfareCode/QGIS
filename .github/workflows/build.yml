@@ -10,4 +10,8 @@ jobs:
       - name: build kadas2-mingw-buildenv
         run: docker build -t kadas2-mingw-buildenv ms-windows
       - name: build application
-        run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh
+        run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh x86_64 nodebug 4
+      - uses: actions/upload-artifact@v1
+        with:
+          name: qgis-portable
+          path: build_mingw64/dist/usr/x86_64-w64-mingw32/sys-root/mingw
