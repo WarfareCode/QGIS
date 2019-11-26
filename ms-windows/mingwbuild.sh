@@ -20,7 +20,7 @@ fi
 # Do copies instead of links if building inside container
 if [ -f /.dockerenv ]; then
     lnk() {
-        cp -a "$1" "$2"
+        cp -aL "$1" "$2"
     }
 else
     lnk() {
