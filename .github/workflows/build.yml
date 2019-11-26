@@ -7,17 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      # - name: build kadas2-mingw-buildenv
-      #   run: docker build -t kadas2-mingw-buildenv ms-windows
+      - name: build kadas2-mingw-buildenv
+        run: docker build -t kadas2-mingw-buildenv ms-windows
       - name: version number
         id: version_number
         run: echo "##[set-output name=version;]$(date +%Y%m%d%S)"
-      # - name: build application
-      #   run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh x86_64 nodebug 4
-      - name: Build project
-        run: |
-          zip --junk-paths qgis-portable-win64 README.md
-
+      - name: build application
+        run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh x86_64 nodebug 4
+      - name: Create portable zip
+        run: (cd build_mingw64/dist/usr/x86_64-w64-mingw32/sys-root/mingw && zip --junk-paths -r - *) > qgis-portable-win64.zip
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.0.0
