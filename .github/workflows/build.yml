@@ -15,7 +15,7 @@ jobs:
       - name: build application
         run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh x86_64 nodebug 4
       - name: Create portable zip
-        run: (cd build_mingw64/dist/usr/x86_64-w64-mingw32/sys-root/mingw && zip --junk-paths -r - *) > qgis-portable-win64.zip
+        run: (cd build_mingw64/dist/usr/x86_64-w64-mingw32/sys-root/mingw && zip -r - *) > qgis-portable-win64.zip
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.0.0
