@@ -11,10 +11,12 @@ jobs:
         run: docker build -t kadas2-mingw-buildenv ms-windows
       - name: build application
         run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh x86_64 nodebug 4
+      - name: Create portable zip
+        run: (cd build_mingw64/dist/usr/x86_64-w64-mingw32/sys-root/mingw && zip -r - *) > qgis-portable-win64.zip
       - uses: actions/upload-artifact@v1
         with:
           name: qgis-portable-win64
-          path: build_mingw64/dist/usr/x86_64-w64-mingw32/sys-root/mingw
+          path: ./qgis-portable-win64.zip
 
   release:
     name: Release
