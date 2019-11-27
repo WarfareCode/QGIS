@@ -10,7 +10,7 @@ jobs:
       - name: build kadas2-mingw-buildenv
         run: docker build -t kadas2-mingw-buildenv ms-windows
       - name: build application
-        run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh x86_64 nodebug 3
+        run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh x86_64 nodebug 4
       - uses: actions/upload-artifact@v1
         with:
           name: qgis-portable-win64
@@ -36,7 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.version_number.outputs.version }}
-          release_name: Release ${{ steps.version_number.outputs.version }}
+          release_name: Build ${{ steps.version_number.outputs.version }}
           draft: false
           prerelease: ${{ !startsWith(github.ref, 'refs/tags/') }}
       - name: Upload Release Asset
