@@ -16,8 +16,19 @@ jobs:
           echo "##[set-output name=version;]$VERSION"
       - name: build application
         run: docker run -v $PWD:/workspace kadas2-mingw-buildenv ms-windows/mingwbuild.sh x86_64 nodebug 2
-      - name: Create portable zip
-        run: (cd build_mingw64/dist/usr/x86_64-w64-mingw32/sys-root/mingw && zip -r - *) > qgis-portable-win64.zip
+      - uses: actions/upload-artifact@v1
+        with:
+          name: qgis-portable-win64
+          path: build_mingw64/dist/usr/x86_64-w64-mingw32/sys-root/mingw
+
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: qgis-portable-win64
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.0.0
